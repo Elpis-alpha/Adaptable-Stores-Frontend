@@ -4,7 +4,7 @@ export const randomAmong = (num1: number, num2: number) => {
 
 }
 
-export const chooseFrom = (arr: []) => {
+export const chooseFrom = (arr: any) => {
 
   return arr[randomAmong(0, (arr.length - 1))]
 
@@ -74,31 +74,12 @@ export const getCookie = (name: string) => {
 
 export const urlify = (text: string) => {
 
-  var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
+  var urlRegex = /bats/ig
+  // var urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig
 
   return text.replace(urlRegex, function (url) {
 
     return '<a target="_blank" href="' + url + '">' + url + '</a>';
-
-  })
-
-}
-
-export const imageify = (text: string) => {
-
-  var imageRegex = /(\(`\+img\+`\))(.*?)(\(`\-img\-`\))/ig
-
-  return text.replace(imageRegex, function (url) {
-
-    url = url.replaceAll(/(\(`\+img\+`\))/ig, '')
-    url = url.replaceAll(/(\(`\-img\-`\))/ig, '')
-
-    const num = url.search(/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig)
-    const num2 = url.search(/,/)
-
-    console.log(url.slice(num));
-
-    return '<img style="width: ' + url.slice(0, num2) + '%" src="' + url.slice(num - 5) + '">'
 
   })
 
@@ -184,7 +165,7 @@ export const insertAtCursor = (myField: any, myValue: any) => {
 
   //MOZILLA and others
 
-  else if (myField.selectionStart || myField.selectionStart == '0') {
+  else if (myField.selectionStart || myField.selectionStart === '0') {
 
     var startPos = myField.selectionStart;
 
@@ -450,7 +431,7 @@ export const addLetters = async (phrase: string, element: HTMLElement, interval:
 
       let newPhrase
 
-      if (element.innerHTML == (phrase + end)) { newPhrase = '`.-x-`.' }
+      if (element.innerHTML === (phrase + end)) { newPhrase = '`.-x-`.' }
 
 
       // Checks if the phrase has once been completed
@@ -612,5 +593,11 @@ export const togglePassword = (passwordInput: HTMLInputElement, toggler: HTMLEle
     })
 
   }
+
+}
+
+export const capitalize = (str: string) => {
+
+  return str.charAt(0).toLocaleUpperCase() + str.slice(1);
 
 }

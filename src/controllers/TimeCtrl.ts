@@ -609,7 +609,7 @@ export const makeCalender = (date: Date) => {
 
     tbody.appendChild(trow)
 
-    let calender = ``
+    // let calender = ``
 
     const row1 = document.createElement('tr')
 

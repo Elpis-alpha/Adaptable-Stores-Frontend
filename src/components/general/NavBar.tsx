@@ -54,7 +54,7 @@ const NavBar = () => {
 
   return (
 
-    <NavBarStyle style={{ zIndex: navOpen ? 80 : 30 }}>
+    <NavBarStyle style={{ zIndex: (navOpen || navClosing) ? 80 : 30 }}>
 
       <nav>
 
@@ -72,6 +72,8 @@ const NavBar = () => {
 
               <ul className="children">
 
+                <li className="only-small"><Link to="/?view=query" onClick={() => toggleNav(false)}>Home</Link></li>
+
                 <li><Link to="/profile" onClick={() => toggleNav(false)}>Profile</Link></li>
 
                 <li><Link to="/logout" onClick={() => toggleNav(false)}>Logout</Link></li>
@@ -81,6 +83,8 @@ const NavBar = () => {
               :
 
               <ul className="children">
+
+                <li className="only-small"><Link to="/?view=query" onClick={() => toggleNav(false)}>Home</Link></li>
 
                 <li><Link to="/signup" onClick={() => toggleNav(false)}>Signup</Link></li>
 
@@ -145,9 +149,10 @@ const NavBarStyle = styled.div`
       ul.children {
         display: flex;
         list-style-type: none;
+        padding-right: 1.5rem;
 
         li a {
-          padding: .75rem;
+          padding: .75rem 1.5rem;
           display: block;
           color: inherit;
           text-decoration: none;
@@ -163,6 +168,10 @@ const NavBarStyle = styled.div`
         display: none;
       }
 
+      .only-small {
+        display: none;
+      }
+
       @keyframes scale-int {
         from{ transform: scale(0) }
         to{ transform: scale(1) }
@@ -174,6 +183,14 @@ const NavBarStyle = styled.div`
       }
 
       @media screen and (max-width: 800px) {
+
+        @media screen and (max-width: 500px) {
+          h1 { font-size: 1.6pc;}
+        }
+        
+        @media screen and (max-width: 350px) {
+          h1 { font-size: 1.5pc }
+        }
         
         .r-side {
           display: none;
@@ -198,6 +215,7 @@ const NavBarStyle = styled.div`
               flex-direction: column;
               background-color: #343d5f;
               overflow: hidden;
+              padding-right: 0;
 
               li a {
                 width: 100%;
@@ -234,6 +252,9 @@ const NavBarStyle = styled.div`
           animation: opacity-in 1s 1;
         }
 
+        .only-small {
+          display: initial;
+        }
       }
     }
   }
