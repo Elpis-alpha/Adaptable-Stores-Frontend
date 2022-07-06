@@ -1,24 +1,50 @@
-import { Link } from "react-router-dom"
+import styled from "styled-components"
 
-import { CategoryParams } from "./__indexTypes"
+import FilterQuery from "./SectionParts/FilterQuery"
 
-const IndexCategory = ({ categoryName }: CategoryParams) => {
-  
+import ProductList from "./SectionParts/ProductList"
+
+import ReturnQuery from "./SectionParts/ReturnQuery"
+
+
+const IndexSection = () => {
 
   return (
 
-    <div>
+    <IndexSectionStyle>
 
-      {categoryName} Category
+      <div className="i-s-container">
 
-      <br />
+        <ReturnQuery />
 
-      <Link to={{ pathname: "/", search: "view=query" }}>Query</Link>
+        <FilterQuery />
 
-    </div>
+        <ProductList />
+
+      </div>
+
+    </IndexSectionStyle>
 
   )
 
 }
 
-export default IndexCategory
+const IndexSectionStyle = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  animation: opacity-in .5s ease-in 1;
+  width: 100%;
+  flex: 1;
+  
+  .i-s-container {
+    width: 100%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+`
+
+export default IndexSection

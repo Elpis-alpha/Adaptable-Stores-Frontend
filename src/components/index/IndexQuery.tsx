@@ -11,7 +11,6 @@ import { reformImage } from "../../controllers/SpecialCtrl"
 
 const IndexQuery = () => {
 
-
   return (
 
     <IndexQueryStyle>
@@ -161,6 +160,9 @@ const IndexQuery = () => {
 const IndexQueryStyle = styled.div`
   display: flex;
   align-items: center;
+  margin: auto 0;
+  width: 100%;
+  animation: scale-in .5s ease-in 1;
 
   .i-q-container {
     margin: auto 0;

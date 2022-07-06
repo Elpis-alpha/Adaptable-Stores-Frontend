@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 import userSlice from "./slice/userSlice";
 
-import taskSlice from "./slice/taskSlice";
+import productSlice from "./slice/productSlice";
 
 import messagesSlice from "./slice/messagesSlice";
 
@@ -15,7 +15,7 @@ const store = configureStore({
 
     user: userSlice,
 
-    item: taskSlice,
+    product: productSlice,
 
     messages: messagesSlice,
 

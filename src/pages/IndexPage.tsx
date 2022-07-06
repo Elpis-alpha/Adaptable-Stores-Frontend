@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react"
+import { useEffect, useMemo, useRef } from "react"
 
 import styled from "styled-components"
 
@@ -8,40 +8,44 @@ import IndexQuery from "../components/index/IndexQuery"
 
 import IndexSection from "../components/index/IndexSection"
 
-import { capitalize } from "../controllers/SpecialCtrl"
+import { useDispatch, useSelector } from "react-redux"
+
+import { setDisplayString } from "../store/slice/productSlice"
 
 
 const IndexPage = () => {
 
   const location = useLocation()
 
+  const dispatch = useDispatch()
+
   const navigate = useRef(useNavigate())
 
   const locationString = location.search.replace("?view=", "")
 
-  const locationOptions = useMemo(() => ['query', 'section:all', 'section:cloth', 'section:book', 'section:shoe', 'section:cosmetic'], [])
+  const { displayString } = useSelector((store: any) => store.product)
 
-  const [displayString, setDisplayString] = useState(locationOptions.includes(locationString) ? locationString : '')
+  const locationOptions = useMemo(() => ['query', 'section:all', 'section:cloth', 'section:book', 'section:shoe', 'section:cosmetic'], [])
 
   // Sets the value of display string and ensures the queery string is valid 
   useEffect(() => {
 
     if (!locationOptions.includes(locationString)) navigate.current('/?view=query')
 
-    else if (displayString !== locationString) setDisplayString(locationString)
+    else if (displayString !== locationString) dispatch(setDisplayString(locationString))
 
-  }, [locationString, displayString, locationOptions])
+  }, [locationString, displayString, locationOptions, dispatch])
 
-  
+
   return (
 
     <IndexPageStyle>
 
       <div className="page-container">
 
-        {displayString === "query" && <IndexQuery />}
+        {(displayString === "query" || displayString === "") && <IndexQuery />}
 
-        {displayString.startsWith("section:") && <IndexSection categoryName={capitalize(displayString.replace('section:', ''))} />}
+        {displayString.startsWith("section:") && <IndexSection />}
 
       </div>
 
@@ -53,18 +57,14 @@ const IndexPage = () => {
 
 const IndexPageStyle = styled.div`
 
-  animation: opacity-in .5s ease-in 1;
   min-width: 100%;
-  /* margin: 0 auto; */
   flex: 1;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   flex-direction: column;
 
   .page-container {
-    width: 100%;
-    margin: auto 0;
+    display: contents;
   }
 `
 
