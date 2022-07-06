@@ -20,6 +20,8 @@ const ProductList = () => {
       // Make sure that the search hasn't been performed
       if (currentList.replace('search: ', '') !== searchValue) {
 
+        // Fetch list with search value and section name
+
       }
       
     } else {
@@ -27,6 +29,8 @@ const ProductList = () => {
 
       // Make sure that the current section isn't the one that is being displayed
       if (currentList.replace('section: ', '') !== currentSection) {
+
+        // Fetch list with section name
 
       }
 

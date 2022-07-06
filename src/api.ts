@@ -29,3 +29,12 @@ export const userExistence = (email: string) => `${backendLocation}/api/users/us
 export const loginUser = () => `${backendLocation}/api/users/login`
 
 export const logoutUser = () => `${backendLocation}/api/users/logout`
+
+
+// Item routes
+export const getAllItems = (sectionName: string, limit: number, skip: number, filter?: string) => {
+
+  return `${backendLocation}/api/items/get-all?limit=${limit}&skip=${skip}&section=${sectionName}${filter ? `&filter=${filter}` : ''}`
+
+}
+
