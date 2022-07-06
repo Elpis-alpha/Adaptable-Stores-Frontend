@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { CategoryParams } from "./__indexTypes"
 
 const IndexCategory = ({ categoryName }: CategoryParams) => {
+  
 
   return (
 

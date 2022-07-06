@@ -601,3 +601,33 @@ export const capitalize = (str: string) => {
   return str.charAt(0).toLocaleUpperCase() + str.slice(1);
 
 }
+
+export const reformImage = (e: any, removeNext: boolean = true) => {
+
+  const smallSize = e.currentTarget
+
+  const fullSize = new Image()
+
+  fullSize.src = smallSize.src.split('/').filter((value: string) => value !== 'blur').join('/')
+
+  fullSize.onload = () => {
+
+    try {
+
+      fullSize.alt = smallSize.alt
+
+      fullSize.title = smallSize.title
+
+      if (smallSize.nextElementSibling && removeNext) smallSize.nextElementSibling.remove()
+
+      smallSize.replaceWith(fullSize)
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+
+  }
+
+}

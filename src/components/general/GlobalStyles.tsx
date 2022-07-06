@@ -167,7 +167,6 @@ body {
   background-color: #fff;
   color: #323232;
   overflow-x: hidden;
-  padding-right: .1rem;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -214,6 +213,11 @@ button{
   outline: 0 none;
   cursor: pointer;
   padding: 0 .5rem;
+}
+
+img {
+  display: block;
+  max-width: 100%;
 }
 
 

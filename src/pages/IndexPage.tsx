@@ -6,7 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 
 import IndexQuery from "../components/index/IndexQuery"
 
-import IndexCategory from "../components/index/IndexCategory"
+import IndexSection from "../components/index/IndexSection"
 
 import { capitalize } from "../controllers/SpecialCtrl"
 
@@ -19,7 +19,7 @@ const IndexPage = () => {
 
   const locationString = location.search.replace("?view=", "")
 
-  const locationOptions = useMemo(() => ['query', 'category:cloth', 'category:book', 'category:shoe', 'category:cosmetic'], [])
+  const locationOptions = useMemo(() => ['query', 'section:all', 'section:cloth', 'section:book', 'section:shoe', 'section:cosmetic'], [])
 
   const [displayString, setDisplayString] = useState(locationOptions.includes(locationString) ? locationString : '')
 
@@ -41,10 +41,9 @@ const IndexPage = () => {
 
         {displayString === "query" && <IndexQuery />}
 
-        {displayString.startsWith("category:") && <IndexCategory categoryName={capitalize(displayString.replace('category:', ''))} />}
+        {displayString.startsWith("section:") && <IndexSection categoryName={capitalize(displayString.replace('section:', ''))} />}
 
       </div>
-
 
     </IndexPageStyle>
 
@@ -64,7 +63,7 @@ const IndexPageStyle = styled.div`
   flex-direction: column;
 
   .page-container {
-    width: 80%;
+    width: 100%;
     margin: auto 0;
   }
 `
