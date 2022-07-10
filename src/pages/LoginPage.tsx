@@ -107,7 +107,7 @@ const LoginPage = () => {
 
                 <input required type="email" id='elpis-aide-email' name='elpis-aide-email' placeholder='Enter your email here'
 
-                  value={formEmail} onInput={e => setFormEmail(e.currentTarget.value)} />
+                  value={formEmail} onInput={e => setFormEmail(e.currentTarget.value)} autoComplete="elpis-aide-email" />
 
               </div>
 
@@ -121,7 +121,7 @@ const LoginPage = () => {
 
                 <input required type={showPassword ? "text" : "password"} id='elpis-aide-pass' name='elpis-aide-pass' placeholder='••••••••••'
 
-                  value={formPass} onInput={e => setFormPass(e.currentTarget.value)} />
+                  value={formPass} onInput={e => setFormPass(e.currentTarget.value)} autoComplete="elpis-aide-pass" />
 
                 <div className='icon-hol'>{getPasswordIcon(showPassword, setShowPassword)}</div>
 

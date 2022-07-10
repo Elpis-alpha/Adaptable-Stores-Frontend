@@ -30,7 +30,7 @@ const IndexPage = () => {
   // Sets the value of display string and ensures the queery string is valid 
   useEffect(() => {
 
-    if (!locationOptions.includes(locationString)) navigate.current('/?view=query')
+    if (!locationOptions.includes(locationString)) navigate.current('/?view=query', { replace: true })
 
     else if (displayString !== locationString) dispatch(setDisplayString(locationString))
 

@@ -11,9 +11,13 @@ import { useSelector } from "react-redux"
 import { Squeeze as Hamburger } from "hamburger-react"
 
 import useWindowDimensions from "../../hooks/useWindowDimensions"
+
 import { useState } from "react"
+
 import { waitFor } from "../../controllers/TimeCtrl"
+
 import { stateClass } from "../../controllers/UICtrl"
+
 
 const NavBar = () => {
 

@@ -32,7 +32,7 @@ export const logoutUser = () => `${backendLocation}/api/users/logout`
 
 
 // Item routes
-export const getAllItems = (sectionName: string, limit: number, skip: number, filter?: string) => {
+export const getAllItems = (sectionName: string, skip: number, limit: number, filter?: string) => {
 
   return `${backendLocation}/api/items/get-all?limit=${limit}&skip=${skip}&section=${sectionName}${filter ? `&filter=${filter}` : ''}`
 

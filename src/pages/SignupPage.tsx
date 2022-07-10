@@ -272,7 +272,7 @@ const SignupPage = () => {
 
                 <input required type="email" id='elpis-aide-email' name='elpis-aide-email' placeholder='Enter your email here'
 
-                  value={formEmail} onInput={validateEmail} onFocus={validateEmail} onBlur={identifyUnique} />
+                  value={formEmail} onInput={validateEmail} onFocus={validateEmail} onBlur={identifyUnique} autoComplete="elpis-aide-email" />
 
                 <div className='icon-hol'>{getEmailIcon(emailStatus)}</div>
 
@@ -290,7 +290,7 @@ const SignupPage = () => {
 
                 <input required type={showPassword ? "text" : "password"} id='elpis-aide-pass' name='elpis-aide-pass' placeholder='••••••••••'
 
-                  value={formPass} onInput={validatePass} onFocus={validatePass} onBlur={validatePass} />
+                  value={formPass} onInput={validatePass} onFocus={validatePass} onBlur={validatePass} autoComplete="elpis-aide-pass" />
 
                 <div className='icon-hol'>{getPasswordIcon(showPassword, setShowPassword)}</div>
 

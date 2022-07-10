@@ -21,7 +21,11 @@ const taskSlice = createSlice({
 
     useSearch: false,
 
-    currentList: ""
+    currentList: "",
+
+    skip: 0,
+
+    limit: 0,
 
   },
 
@@ -43,17 +47,21 @@ const taskSlice = createSlice({
 
     setProductList: (state, { payload }) => {
 
-      state.productList = payload
+      state.productList = payload.data
+
+      state.skip = payload.skip
+
+      state.limit = payload.limit
 
       state.loadingList = false
 
-      if (state.useSearch) {
+      if (payload.searchValue) {
 
-        state.currentList = `search: ${state.searchValue}`
-        
+        state.currentList = `section: ${payload.section} || search: ${payload.searchValue}`
+
       } else {
 
-        state.currentList = `section: ${state.currentSection}`
+        state.currentList = `section: ${payload.section}`
 
       }
 

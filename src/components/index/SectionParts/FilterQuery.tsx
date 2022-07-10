@@ -19,7 +19,15 @@ const FilterQuery = () => {
 
     e.preventDefault()
 
-    dispatch(setSearchValueX(searchValue))
+    if (searchValue.trim().length < 1) {
+
+      resetForm()
+
+    } else {
+
+      dispatch(setSearchValueX(searchValue.trim()))
+
+    }
 
   }
 

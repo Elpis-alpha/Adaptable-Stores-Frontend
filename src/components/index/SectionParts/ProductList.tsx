@@ -4,39 +4,78 @@ import { useDispatch, useSelector } from "react-redux"
 
 import styled from "styled-components"
 
+import { getApiJson } from "../../../controllers/APICtrl"
+
 import { loadingProductList, setProductList } from "../../../store/slice/productSlice"
+
+import { getAllItems } from "../../../api"
+
+import ProductLView from "./ProductLView"
+
 
 const ProductList = () => {
 
   const dispatch = useDispatch()
-  
+
   const { currentSection, loadingList, searchValue, useSearch, productList, currentList } = useSelector((store: any) => store.product)
 
   useEffect(() => {
 
-    // If it in search mode
-    if (useSearch) {
+    const initialFetch = async () => {
 
-      // Make sure that the search hasn't been performed
-      if (currentList.replace('search: ', '') !== searchValue) {
+      // If it in search mode
+      if (useSearch) {
 
-        // Fetch list with search value and section name
+        // Make sure that the search hasn't been performed
+        if (currentList.split(' || ')[1]?.replace('search: ', '') !== searchValue) {
 
-      }
-      
-    } else {
-      // If its in section mode
+          // Fetch list with search value and section name
 
-      // Make sure that the current section isn't the one that is being displayed
-      if (currentList.replace('section: ', '') !== currentSection) {
+          dispatch(loadingProductList())
 
-        // Fetch list with section name
+          const productData = await getApiJson(getAllItems(currentSection, 0, 10, searchValue))
+
+          if (productData.error) {
+
+            console.log('Error in fetch');
+
+          } else {
+
+            dispatch(setProductList({ data: productData, limit: 10, skip: 0, section: currentSection, searchValue }))
+
+          }
+
+        }
+
+      } else {
+        // If its in section mode
+
+        // Make sure that the current section isn't the one that is being displayed
+        if (currentList.replace('section: ', '') !== currentSection) {
+
+          // Fetch list with section name
+
+          dispatch(loadingProductList())
+
+          const productData = await getApiJson(getAllItems(currentSection, 0, 10))
+
+          if (productData.error) {
+
+            console.log('Error in fetch');
+
+          } else {
+
+            dispatch(setProductList({ data: productData, limit: 10, skip: 0, section: currentSection }))
+
+          }
+
+        }
 
       }
 
     }
 
-    // dispatch(loadingProductList())
+    initialFetch()
 
   }, [currentSection, searchValue, useSearch, dispatch, currentList])
 
@@ -45,9 +84,15 @@ const ProductList = () => {
 
     <ProductListStyle>
 
-      {!loadingList && <div className="p-l-container">
+      {(!loadingList && productList.length > 0) && <div className="p-l-container">
 
-        {productList.map((product: any) => <div key={product._id}>{product.title}</div>)}
+        {productList.map((product: any) => <ProductLView key={product._id} productData={product} />)}
+
+      </div>}
+
+      {(!loadingList && productList.length < 1) && <div className="p-l-empty">
+
+        No Product Here
 
       </div>}
 
@@ -72,10 +117,27 @@ const ProductListStyle = styled.div`
   .p-l-container {
     width: 100%;
     padding: .5rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    align-content: flex-start;
+    flex-wrap: wrap;
   }
 
   .p-l-fake {
     /* Loading Stuff */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .p-l-empty {
+    /* Loading Stuff */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
   }
 `
 
