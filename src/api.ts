@@ -34,7 +34,13 @@ export const logoutUser = () => `${backendLocation}/api/users/logout`
 // Item routes
 export const getAllItems = (sectionName: string, skip: number, limit: number, filter?: string) => {
 
-  return `${backendLocation}/api/items/get-all?limit=${limit}&skip=${skip}&section=${sectionName}${filter ? `&filter=${filter}` : ''}`
+  return `${backendLocation}/api/items/get-all?limit=${limit}&skip=${skip}&section=${sectionName}&sortBy=updatedAt:desc${filter ? `&filter=${filter}` : ''}`
+
+}
+
+export const getItemPicture = (itemID: string, picID: string) => {
+
+  return `${backendLocation}/api/items/pictures/view?_id=${itemID}&picID=${picID}`
 
 }
 
