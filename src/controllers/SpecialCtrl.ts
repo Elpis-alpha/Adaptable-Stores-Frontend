@@ -631,3 +631,20 @@ export const reformImage = (e: any, removeNext: boolean = true) => {
   }
 
 }
+
+export const getQueryObject = (href = window?.location?.href) => {
+
+  const params = (new URL(href)).searchParams;
+  
+  const urlParams: any = {}
+
+  // @ts-ignore
+  for (let p of params) {
+
+    urlParams[p[0]] = p[1]
+
+  }
+
+  return urlParams
+
+}

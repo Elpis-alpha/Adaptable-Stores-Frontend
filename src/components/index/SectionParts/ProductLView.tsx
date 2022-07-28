@@ -1,4 +1,4 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components"
 
@@ -17,8 +17,6 @@ const ProductLView = ({ productData }: any) => {
 
   const leftSideRef = useRef(null)
 
-  const params = useSearchParams()
-
   useEffect(() => {
 
     const displayPicture = () => {
@@ -35,7 +33,7 @@ const ProductLView = ({ productData }: any) => {
 
           proImage.title = `Picture of ${title}`;
 
-          (leftSideRef.current as any).firstElementChild?.replaceWith(proImage)
+          (leftSideRef.current as any)?.firstElementChild?.replaceWith(proImage)
 
         }
 
@@ -51,7 +49,7 @@ const ProductLView = ({ productData }: any) => {
 
             errorImage.title = 'Error Image';
 
-            (leftSideRef.current as any).firstElementChild?.replaceWith(errorImage)
+            (leftSideRef.current as any)?.firstElementChild?.replaceWith(errorImage)
 
           }
 
@@ -69,7 +67,7 @@ const ProductLView = ({ productData }: any) => {
 
           noImage.title = `Default image for ${section} section`;
 
-          (leftSideRef.current as any).firstElementChild?.replaceWith(noImage)
+          (leftSideRef.current as any)?.firstElementChild?.replaceWith(noImage)
 
         }
 
@@ -85,7 +83,7 @@ const ProductLView = ({ productData }: any) => {
 
             errorImage.title = 'Error Image';
 
-            (leftSideRef.current as any).firstElementChild?.replaceWith(errorImage)
+            (leftSideRef.current as any)?.firstElementChild?.replaceWith(errorImage)
 
           }
 
@@ -123,9 +121,9 @@ const ProductLView = ({ productData }: any) => {
 
             <div className="right-side">
 
-              <h3>{title}</h3>
+              <h3 title={title}>{title}</h3>
 
-              <p>{description}</p>
+              <p title={description}>{description}</p>
 
               <div className="end">
 

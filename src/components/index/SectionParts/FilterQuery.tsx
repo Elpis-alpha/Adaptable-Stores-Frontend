@@ -4,12 +4,14 @@ import { FaSearch, FaTimes } from "react-icons/fa"
 
 import { useDispatch } from "react-redux"
 
-import styled from "styled-components"
+import { useNavigate,  } from "react-router-dom"
 
-import { disableSearch, setSearchValue as setSearchValueX } from "../../../store/slice/productSlice"
+import styled from "styled-components"
 
 
 const FilterQuery = () => {
+
+  const navigate = useNavigate()
 
   const [searchValue, setSearchValue] = useState("")
 
@@ -86,6 +88,7 @@ const FilterQueryStyle = styled.div`
   right: 0;
   width: 100%;
   z-index: 50;
+  margin-top: .5rem;
 
   form.fq-inner {
     display: flex;

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { capitalize } from '../../controllers/SpecialCtrl'
+import { capitalize, getQueryObject } from '../../controllers/SpecialCtrl'
 
 
 const taskSlice = createSlice({
@@ -17,10 +17,6 @@ const taskSlice = createSlice({
 
     loadingList: true,
 
-    searchValue: "",
-
-    useSearch: false,
-
     currentList: "",
 
     skip: 0,
@@ -31,15 +27,15 @@ const taskSlice = createSlice({
 
   reducers: {
 
-    setDisplayString: (state, { payload }) => {
+    setDisplayString: (state, { payload: view }) => {
 
       const allowedValues = ['query', 'section:all', 'section:cloth', 'section:book', 'section:shoe', 'section:cosmetic']
 
-      if (allowedValues.find(item => item === payload)) {
+      if (allowedValues.find(item => item === view)) {
 
-        state.displayString = payload
+        state.displayString = view
 
-        state.currentSection = payload.split(':')[1] ? capitalize(payload.split(':')[1]) : "All"
+        state.currentSection = view.split(':')[1] ? capitalize(view.split(':')[1]) : "All"
 
       }
 
@@ -55,31 +51,15 @@ const taskSlice = createSlice({
 
       state.loadingList = false
 
-      if (payload.searchValue) {
+      if (payload.search) {
 
-        state.currentList = `section: ${payload.section} || search: ${payload.searchValue}`
+        state.currentList = `section: ${payload.section} || search: ${payload.search}`
 
       } else {
 
         state.currentList = `section: ${payload.section}`
 
       }
-
-    },
-
-    setSearchValue: (state, { payload }) => {
-
-      state.searchValue = payload
-
-      state.useSearch = true
-
-    },
-
-    disableSearch: (state) => {
-
-      state.searchValue = ""
-
-      state.useSearch = false
 
     },
 
@@ -97,4 +77,4 @@ const taskSlice = createSlice({
 
 export default taskSlice.reducer;
 
-export const { setDisplayString, setProductList, loadingProductList, setSearchValue, disableSearch } = taskSlice.actions
+export const { setDisplayString, setProductList, loadingProductList } = taskSlice.actions
