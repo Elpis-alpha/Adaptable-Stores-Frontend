@@ -4,13 +4,15 @@ import { Link } from "react-router-dom"
 
 import styled from "styled-components"
 
+import { createQueryString } from "../../../controllers/SpecialCtrl"
+
 const ReturnQuery = () => {
 
   return (
 
     <ReturnQueryStyle>
 
-      <Link to={{ pathname: "/", search: "view=query" }}>
+      <Link to={createQueryString({ view: "query" })}>
 
         <div className="center">
 

@@ -2,11 +2,13 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components"
 
-import { SpinnerDiamond } from "spinners-react";
+import { SpinnerDiamond, SpinnerCircular } from "spinners-react";
 
 import { useEffect, useRef, useState } from "react";
 
 import { getItemPicture } from "../../../api";
+
+import { FaCamera } from "react-icons/fa";
 
 
 const ProductLView = ({ productData }: any) => {
@@ -33,7 +35,9 @@ const ProductLView = ({ productData }: any) => {
 
           proImage.title = `Picture of ${title}`;
 
-          (leftSideRef.current as any)?.firstElementChild?.replaceWith(proImage)
+          (leftSideRef.current as any)?.firstElementChild?.replaceWith(proImage);
+
+          (leftSideRef.current as any)?.firstElementChild?.nextElementSibling?.classList.add('show')
 
         }
 
@@ -49,7 +53,9 @@ const ProductLView = ({ productData }: any) => {
 
             errorImage.title = 'Error Image';
 
-            (leftSideRef.current as any)?.firstElementChild?.replaceWith(errorImage)
+            (leftSideRef.current as any)?.firstElementChild?.replaceWith(errorImage);
+
+            (leftSideRef.current as any)?.firstElementChild?.nextElementSibling?.classList.add('show')
 
           }
 
@@ -67,7 +73,9 @@ const ProductLView = ({ productData }: any) => {
 
           noImage.title = `Default image for ${section} section`;
 
-          (leftSideRef.current as any)?.firstElementChild?.replaceWith(noImage)
+          (leftSideRef.current as any)?.firstElementChild?.replaceWith(noImage);
+
+          (leftSideRef.current as any)?.firstElementChild?.nextElementSibling?.classList.add('show')
 
         }
 
@@ -83,7 +91,9 @@ const ProductLView = ({ productData }: any) => {
 
             errorImage.title = 'Error Image';
 
-            (leftSideRef.current as any)?.firstElementChild?.replaceWith(errorImage)
+            (leftSideRef.current as any)?.firstElementChild?.replaceWith(errorImage);
+
+            (leftSideRef.current as any)?.firstElementChild?.nextElementSibling?.classList.add('show')
 
           }
 
@@ -103,6 +113,15 @@ const ProductLView = ({ productData }: any) => {
 
   }, [pics, section, _id, title, startedLoadingPic])
 
+  const addItemToCart = (e: any) => {
+
+    e.preventDefault()
+
+    // adding a class of 'l' will change the text to adding
+    e.currentTarget.parentElement.classList.add('l')
+
+  }
+
   return (
 
     <ProductLViewStyle>
@@ -113,9 +132,19 @@ const ProductLView = ({ productData }: any) => {
 
           <div className="inner">
 
-            <div className="left-side" ref={leftSideRef}>
+            <div className="left-side">
 
-              <SpinnerDiamond size="3pc" />
+              <div className="img-holder" ref={leftSideRef}>
+
+                <SpinnerDiamond size="3pc" />
+
+                <div className="img-end">
+
+                  <FaCamera size=".8pc" color="white" /> {pics.length}
+
+                </div>
+
+              </div>
 
             </div>
 
@@ -127,50 +156,19 @@ const ProductLView = ({ productData }: any) => {
 
               <div className="end">
 
-                {/* <span>{section}</span> */}
-                <span>Add to Cart</span>
+                <span className="ad-cart" title={`Add ${title} to cart`}>
+
+                  <span className="init" onClick={addItemToCart}>Add to Cart</span>
+
+                  <span className="load">Adding <SpinnerCircular size=".9pc" color="white" secondaryColor="#a2a2a2" style={{marginLeft: ".2pc"}} /></span>
+
+                </span>
 
                 <span className="price">${price}</span>
 
               </div>
 
             </div>
-
-            <svg viewBox="0 0 100 12" className="bottom-fix">
-
-              <defs>
-
-                <linearGradient id="gradient-pl" x1="0%" y1="50%" x2="100%" y2="50%">
-
-                  <stop offset="5%" stopColor="#4165d2ff"></stop>
-
-                  <stop offset="95%" stopColor="#4a5784ff"></stop>
-
-                </linearGradient>
-
-              </defs>
-
-              <polygon points="100,0 100,12 0,12" fill="url(#gradient-pl)"></polygon>
-
-            </svg>
-
-            <svg viewBox="0 0 100 20" className="top-fix">
-
-              <defs>
-
-                <linearGradient id="gradient-plx" x1="0%" y1="50%" x2="100%" y2="50%">
-
-                  <stop offset="5%" stopColor="#4165d2ff"></stop>
-
-                  <stop offset="95%" stopColor="#4a5784ff"></stop>
-
-                </linearGradient>
-
-              </defs>
-
-              <polygon points="0,0 100,0 0,20" fill="url(#gradient-plx)"></polygon>
-
-            </svg>
 
           </div>
 
@@ -211,8 +209,14 @@ const ProductLViewStyle = styled.div`
       text-decoration: none;
       background-color: #fff;
       border-radius: 1rem;
+      border-left: 3px solid rgb(130, 145, 197);
       overflow: hidden;
-      box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+      box-shadow: 5px 5px 10px rgba(130, 145, 197,.3);
+      transition: transform .5s;
+
+      &:hover {
+        transform: scale(1.05);
+      }
 
       .inner {
         display: flex;
@@ -231,10 +235,46 @@ const ProductLViewStyle = styled.div`
           flex: 1;
           height: 100%;
 
-          img {
-            max-width: 80%;
-            max-height: 80%;
-            // border-radius: 1rem;
+          svg {
+            display: flex;
+          }
+
+          .img-holder {
+            width: 80%;
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+
+            img {
+              width: 100%;
+              height: 100%;
+              display: block;
+              object-fit: cover;
+            }
+          }
+
+          .img-end {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            bottom: 0; right: 0;
+            background-color: rgba(0, 0, 0, .5);
+            font-size: .9pc;
+            line-height: 1pc;
+            padding: 0.2rem .4rem;
+            /* border-radius: 0.2pc; */
+            color: white;
+            
+            &.show { display: flex }
+
+            svg {
+              color: white;
+              fill: white;
+              margin-right: .2rem;
+            }
           }
         }
 
@@ -249,6 +289,11 @@ const ProductLViewStyle = styled.div`
             white-space: pre;
             text-overflow: ellipsis;
             padding-bottom: .5pc;
+            
+            @media screen and (max-width: 390px) {
+              font-size: 1.2pc;
+              padding-bottom: .2pc;
+            }
           }
           
           p {
@@ -257,18 +302,68 @@ const ProductLViewStyle = styled.div`
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-          }
 
+            @media screen and (max-width: 390px) {
+              font-size: .8pc;
+            }
+          }
+          
           .end {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            font-size: .9pc;
 
+            .ad-cart {
+              display: inline-block;
+              background-color: #4a5c92;
+              margin-top: .3pc;
+              border-radius: 0.4pc;
+              color: white;
+              line-height: .9pc;
+              
+              span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 0.4pc .6pc;
+                
+                &.load {
+                  display: none;
+                }
+              }
+
+              &.i {
+
+              }
+
+              &.l {
+                opacity: .5;
+                cursor: not-allowed;
+
+                span.init {
+                  display: none;
+                }
+
+                span.load {
+                  display: flex;
+                }
+              }
+            }
+            
             .price {
               font-size: 2.2pc;
               position: absolute;
               top: .7pc;
               right: 0;
+            }
+            
+            @media screen and (max-width: 390px) {
+              font-size: .8pc;
+              
+              .price {
+                font-size: 2pc;
+              }
             }
           }
         }
@@ -277,14 +372,14 @@ const ProductLViewStyle = styled.div`
           fill: #485c9b;
           z-index: 10;
           // opacity: .5;
-          // display: none;
         }
-
+        
         .bottom-fix {
           position: absolute;
           bottom: 0;
           right: 0;
           width: 70%;
+          display: none;
         }
 
         .top-fix {

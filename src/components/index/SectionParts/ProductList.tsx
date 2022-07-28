@@ -6,38 +6,44 @@ import styled from "styled-components"
 
 import { getApiJson } from "../../../controllers/APICtrl"
 
-import { loadingProductList, setProductList } from "../../../store/slice/productSlice"
-
 import { getAllItems } from "../../../api"
 
 import ProductLView from "./ProductLView"
 
 import { getQueryObject } from "../../../controllers/SpecialCtrl"
 
+import { loadingMultiProductList, setMultiProductList } from "../../../store/slice/productSlice"
+
+import { reterieveSectionName } from "../../../controllers/GeneralCtrl"
+
 
 const ProductList = () => {
 
   const dispatch = useDispatch()
 
-  const { currentSection, loadingList, searchValue, useSearch, productList, currentList } = useSelector((store: any) => store.product)
+  const { view, search, count } = getQueryObject()
+
+  const { multiProduct } = useSelector((store: any) => store.product)
+
+  const { available, loading, queryData, data } = multiProduct
 
   useEffect(() => {
 
     const initialFetch = async () => {
 
-      const { search } = getQueryObject()
+      const querySection = reterieveSectionName(view)
 
       // If it in search mode
-      if (search && search?.length > 0) {
+      if (search) {
 
         // Make sure that the search hasn't been performed
-        if (currentList.split(' || ')[1]?.replace('search: ', '') !== search) {
+        if (queryData.search !== search || queryData.view !== view) {
 
           // Fetch list with search value and section name
 
-          dispatch(loadingProductList())
+          dispatch(loadingMultiProductList(true))
 
-          const productData = await getApiJson(getAllItems(currentSection, 0, 10, search))
+          const productData = await getApiJson(getAllItems(querySection, 0, count, search))
 
           if (productData.error) {
 
@@ -45,7 +51,17 @@ const ProductList = () => {
 
           } else {
 
-            dispatch(setProductList({ data: productData, limit: 10, skip: 0, section: currentSection }))
+            dispatch(setMultiProductList({
+
+              available: true,
+
+              loading: false,
+
+              queryData: getQueryObject(),
+
+              data: productData
+
+            }))
 
           }
 
@@ -55,13 +71,13 @@ const ProductList = () => {
         // If its in section mode
 
         // Make sure that the current section isn't the one that is being displayed
-        if (currentList.replace('section: ', '') !== currentSection) {
+        if (queryData.view !== view || queryData.search !== undefined) {
 
           // Fetch list with section name
 
-          dispatch(loadingProductList())
+          dispatch(loadingMultiProductList(true))
 
-          const productData = await getApiJson(getAllItems(currentSection, 0, 10))
+          const productData = await getApiJson(getAllItems(querySection, 0, count))
 
           if (productData.error) {
 
@@ -69,7 +85,17 @@ const ProductList = () => {
 
           } else {
 
-            dispatch(setProductList({ data: productData, limit: 10, skip: 0, section: currentSection }))
+            dispatch(setMultiProductList({
+
+              available: true,
+
+              loading: false,
+
+              queryData: getQueryObject(),
+
+              data: productData
+
+            }))
 
           }
 
@@ -81,26 +107,26 @@ const ProductList = () => {
 
     initialFetch()
 
-  }, [currentSection, searchValue, useSearch, dispatch, currentList])
+  }, [dispatch, count, queryData, search, view])
 
 
   return (
 
     <ProductListStyle>
 
-      {(!loadingList && productList.length > 0) && <div className="p-l-container">
+      {(!loading && data.length > 0 && available) && <div className="p-l-container">
 
-        {productList.map((product: any) => <ProductLView key={product._id} productData={product} />)}
+        {data.map((product: any) => <ProductLView key={product._id} productData={product} />)}
 
       </div>}
 
-      {(!loadingList && productList.length < 1) && <div className="p-l-empty">
+      {(!loading && data.length < 1) && <div className="p-l-empty">
 
         No Product Here
 
       </div>}
 
-      {loadingList && <div className="p-l-fake">
+      {loading && <div className="p-l-fake">
 
         Loading...
 

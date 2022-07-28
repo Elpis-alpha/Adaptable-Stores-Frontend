@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 import { FaSearch, FaTimes } from "react-icons/fa"
 
-import { useDispatch } from "react-redux"
-
-import { useNavigate,  } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 
 import styled from "styled-components"
+
+import { createQueryString, getQueryObject } from "../../../controllers/SpecialCtrl"
 
 
 const FilterQuery = () => {
@@ -15,7 +15,7 @@ const FilterQuery = () => {
 
   const [searchValue, setSearchValue] = useState("")
 
-  const dispatch = useDispatch()
+  const { view } = getQueryObject()
 
   const filterHandler = (e: React.FormEvent<HTMLFormElement>) => {
 
@@ -27,7 +27,7 @@ const FilterQuery = () => {
 
     } else {
 
-      dispatch(setSearchValueX(searchValue.trim()))
+      navigate(createQueryString({ view, search: searchValue.trim(), count: 10 }))
 
     }
 
@@ -37,16 +37,9 @@ const FilterQuery = () => {
 
     setSearchValue("")
 
-    dispatch(disableSearch())
+    navigate(createQueryString({ view, count: 10 }))
 
   }
-
-  useEffect(() => {
-
-    return () => { dispatch(disableSearch()) }
-
-  }, [dispatch])
-
 
   return (
 
@@ -110,7 +103,7 @@ const FilterQueryStyle = styled.div`
         padding-left: 3pc;
         padding-right: 8pc;
         background-color: #fff;
-        box-shadow: 1px 1px 3px #868dab;
+        box-shadow: 3px 3px 6px rgba(130, 145, 197,.2);
 
         @media screen and (max-width: 350px) {
           padding-right: 6pc;

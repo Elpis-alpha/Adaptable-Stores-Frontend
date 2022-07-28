@@ -8,33 +8,23 @@ import IndexQuery from "../components/index/IndexQuery"
 
 import IndexSection from "../components/index/IndexSection"
 
-import { useDispatch, useSelector } from "react-redux"
-
-import { setDisplayString } from "../store/slice/productSlice"
-
-import { getQueryObject } from "../controllers/SpecialCtrl"
+import { getQueryObject, createQueryString } from "../controllers/SpecialCtrl"
 
 
 const IndexPage = () => {
 
-  const dispatch = useDispatch()
-
   const navigate = useRef(useNavigate())
 
-  const { view: locationString } = getQueryObject()
-
-  const { displayString } = useSelector((store: any) => store.product)
+  const { view } = getQueryObject()
 
   const locationOptions = useMemo(() => ['query', 'section:all', 'section:cloth', 'section:book', 'section:shoe', 'section:cosmetic'], [])
 
   // Sets the value of display string and ensures the query string is valid 
   useEffect(() => {
 
-    if (!locationOptions.includes(locationString)) navigate.current('/?view=query', { replace: true })
+    if (!locationOptions.includes(view)) navigate.current(createQueryString({ view: 'query' }), { replace: true })
 
-    else if (displayString !== locationString) dispatch(setDisplayString(locationString))
-
-  }, [locationString, displayString, locationOptions, dispatch])
+  }, [view, locationOptions])
 
 
   return (
@@ -43,9 +33,9 @@ const IndexPage = () => {
 
       <div className="page-container">
 
-        {(displayString === "query" || displayString === "") && <IndexQuery />}
+        {(view === "query" || view === "" || view === undefined || !locationOptions.includes(view)) && <IndexQuery />}
 
-        {displayString.startsWith("section:") && <IndexSection />}
+        {view?.startsWith("section:") && <IndexSection />}
 
       </div>
 

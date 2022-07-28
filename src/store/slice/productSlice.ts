@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { capitalize, getQueryObject } from '../../controllers/SpecialCtrl'
-
 
 const taskSlice = createSlice({
 
@@ -9,65 +7,43 @@ const taskSlice = createSlice({
 
   initialState: {
 
-    displayString: "",
+    singleProduct: {
 
-    currentSection: "All",
+      available: false,
 
-    productList: [],
+      loading: false,
 
-    loadingList: true,
+      queryData: {},
 
-    currentList: "",
+      data: {}
 
-    skip: 0,
+    },
 
-    limit: 0,
+    multiProduct: {
+
+      available: false,
+
+      loading: false,
+
+      queryData: {},
+
+      data: []
+
+    },
 
   },
 
   reducers: {
 
-    setDisplayString: (state, { payload: view }) => {
+    loadingMultiProductList: (state, { payload }) => {
 
-      const allowedValues = ['query', 'section:all', 'section:cloth', 'section:book', 'section:shoe', 'section:cosmetic']
-
-      if (allowedValues.find(item => item === view)) {
-
-        state.displayString = view
-
-        state.currentSection = view.split(':')[1] ? capitalize(view.split(':')[1]) : "All"
-
-      }
+      state.multiProduct.loading = payload
 
     },
 
-    setProductList: (state, { payload }) => {
+    setMultiProductList: (state, { payload }) => {
 
-      state.productList = payload.data
-
-      state.skip = payload.skip
-
-      state.limit = payload.limit
-
-      state.loadingList = false
-
-      if (payload.search) {
-
-        state.currentList = `section: ${payload.section} || search: ${payload.search}`
-
-      } else {
-
-        state.currentList = `section: ${payload.section}`
-
-      }
-
-    },
-
-    loadingProductList: (state) => {
-
-      state.loadingList = true
-
-      state.productList = []
+      state.multiProduct = payload
 
     },
 
@@ -77,4 +53,4 @@ const taskSlice = createSlice({
 
 export default taskSlice.reducer;
 
-export const { setDisplayString, setProductList, loadingProductList } = taskSlice.actions
+export const { loadingMultiProductList, setMultiProductList } = taskSlice.actions

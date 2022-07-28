@@ -6,7 +6,7 @@ import { SpinnerCircular as Spinner } from "spinners-react"
 
 import { siteName } from "../../__env"
 
-import { reformImage } from "../../controllers/SpecialCtrl"
+import { createQueryString, reformImage } from "../../controllers/SpecialCtrl"
 
 
 const IndexQuery = () => {
@@ -21,7 +21,7 @@ const IndexQuery = () => {
 
           <div className="product-container" data-section-name="All">
 
-            <Link to={{ pathname: "/", search: "view=section:all" }} title={"Combination of all sections in " + siteName}>
+            <Link to={createQueryString({ view: "section:all", count: 10 })} title={"Combination of all sections in " + siteName}>
 
               <div className="product-inner">
 
@@ -53,7 +53,7 @@ const IndexQuery = () => {
 
           <div className="product-container" data-section-name="Cloth">
 
-            <Link to={{ pathname: "/", search: "view=section:cloth" }} title={"Clothes section in " + siteName}>
+            <Link to={createQueryString({ view: "section:cloth", count: 10 })} title={"Clothes section in " + siteName}>
 
               <div className="product-inner">
 
@@ -85,7 +85,7 @@ const IndexQuery = () => {
 
           <div className="product-container" data-section-name="Shoe">
 
-            <Link to={{ pathname: "/", search: "view=section:shoe" }} title={"Shoes section in " + siteName}>
+            <Link to={createQueryString({ view: "section:shoe", count: 10 })} title={"Shoes section in " + siteName}>
 
               <div className="product-inner">
 
@@ -117,7 +117,7 @@ const IndexQuery = () => {
 
           <div className="product-container" data-section-name="Cosmetic">
 
-            <Link to={{ pathname: "/", search: "view=section:cosmetic" }} title={"Cosmetics section in " + siteName}>
+            <Link to={createQueryString({ view: "section:cosmetic", count: 10 })} title={"Cosmetics section in " + siteName}>
 
               <div className="product-inner">
 

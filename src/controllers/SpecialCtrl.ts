@@ -648,3 +648,29 @@ export const getQueryObject = (href = window?.location?.href) => {
   return urlParams
 
 }
+
+export const createQueryString = (queryObject: any) => {
+
+  let queryString = "?"
+
+  const queryKeys = Object.keys(queryObject)
+
+  for (const queryName of queryKeys) {
+
+    const queryValue = queryObject[queryName];
+
+    if (queryKeys.indexOf(queryName) === 0) {
+
+      queryString = queryString + encodeURI(`${queryName}=${queryValue}`)
+
+    } else {
+
+      queryString = queryString + encodeURI(`&${queryName}=${queryValue}`)
+
+    }
+
+  }
+
+  return queryString
+
+}
