@@ -23,7 +23,7 @@ const SmallMessage = () => {
 
         <div className="content" style={content.style}>{content.text}</div>
 
-        <div className="close-x" onClick={e => removeSmallMessage()}><FaTimes size="1rem" color="darkred" /></div>
+        <div className="close-x" onClick={e => removeSmallMessage()}><FaTimes size="1pc" color="darkred" /></div>
 
       </div>
 
@@ -49,29 +49,29 @@ const SmallMessageStyle = styled.div`
   animation: slide-small-message-left .5s 1 ease-in-out;
 
   div.small-message{
-    min-height: 6rem;
+    min-height: 6pc;
     align-items: center;
     justify-content: center;
     width: 70vw;
     display: flex;
-    border-radius: 1rem;
-    padding: 1rem;
+    border-radius: 1pc;
+    padding: 1pc;
     background: linear-gradient(145deg, #cacaca, #f0f0f0);
     text-align: center;
     /* background: #e0e0e0; */
     box-shadow: 10px 10px 20px #797979, -10px -10px 20px #fff;
-    font-size: 1rem;
-    line-height: 2rem;
+    font-size: 1pc;
+    line-height: 2pc;
     flex-direction: column;
 
     .heading{
-      font-size: 1.5rem;
+      font-size: 1.5pc;
       font-weight: bold;
     }
 
     .close-x{
       position: absolute;
-      top: .7rem; right: .7rem;
+      top: .7pc; right: .7pc;
       cursor: pointer;
     }
   }

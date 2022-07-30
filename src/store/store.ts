@@ -8,6 +8,8 @@ import messagesSlice from "./slice/messagesSlice";
 
 import displaySlice from "./slice/displaySlice";
 
+import cartSlice from "./slice/cartSlice";
+
 
 const store = configureStore({
 
@@ -19,7 +21,9 @@ const store = configureStore({
 
     messages: messagesSlice,
 
-    display: displaySlice
+    display: displaySlice,
+
+    cart: cartSlice,
 
   }
 

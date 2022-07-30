@@ -23,9 +23,9 @@ const ButtonStyle = styled.button`
   cursor: pointer;
   background-color: #4472c1;
   border: 0 none; outline: 0 none;
-  padding: .1rem 1rem;
-  border-radius: .5rem;
-  margin: .2rem;
+  padding: .1pc 1pc;
+  border-radius: .5pc;
+  margin: .2pc;
   overflow: hidden;
   color: white;
   /* transition: all .5s; */
@@ -44,9 +44,9 @@ const ButtonStyle = styled.button`
     opacity: 0;
     top: 0; bottom: 0;
     height: 100%;
-    font-size: 1.5rem;
-    line-height: 2rem;
-    right: -1rem;
+    font-size: 1.5pc;
+    line-height: 2pc;
+    right: -1pc;
     transition: 0.5s;
     display: flex;
     align-items: center;
@@ -54,7 +54,7 @@ const ButtonStyle = styled.button`
   }
 
   &:hover span {
-    padding-right: 1rem;
+    padding-right: 1pc;
   }
 
   &:hover span:after {

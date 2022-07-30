@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 import { BiCheckShield } from "react-icons/bi"
 
-import { FaCopy, FaSave, FaTimes } from "react-icons/fa"
+import { FaCopy, FaInfo, FaSave, FaTimes } from "react-icons/fa"
 
 import { useSelector } from "react-redux"
 
@@ -15,16 +15,17 @@ const MiniMessage = () => {
 
   const iconObject: any = {
 
-    'ok': <BiCheckShield size="1.2rem" />,
+    'ok': <BiCheckShield size="1.2pc" />,
 
-    'copy': <FaCopy size="1.2rem" />,
+    'copy': <FaCopy size="1.2pc" />,
 
-    'save': <FaSave size="1.2rem" />,
+    'save': <FaSave size="1.2pc" />,
 
-    'times': <FaTimes size="1.2rem" />,
+    'info': <FaInfo size="1.2pc" />,
 
-    'loading': <SpinnerCircular size="12rem" color="white" secondaryColor="#b3b3b3" />,
+    'times': <FaTimes size="1.2pc" />,
 
+    'loading': <SpinnerCircular size="1.2pc" color="white" secondaryColor="#b3b3b3" />,
 
   }
 
@@ -53,16 +54,16 @@ const MiniMessage = () => {
 const MiniMessageStyle = styled.div`
 
   @keyframes slide-mini-message-up{
-    0%{bottom: -3rem;}
-    100%{bottom: 1rem;}
+    0%{bottom: -3pc;}
+    100%{bottom: 1pc;}
   }
 
   position: fixed;
   right: 0;
   left: 0; 
-  bottom: 1rem;
+  bottom: 1pc;
   z-index: 50;
-  margin: 1rem auto;
+  margin: 1pc auto;
   display: none;
   align-items: center;
   justify-content: center;
@@ -75,7 +76,7 @@ const MiniMessageStyle = styled.div`
     color: white;
     fill: white;
     display: flex;
-    border-radius: .5rem;
+    border-radius: .5pc;
 
     .mini-divider{
       align-self: stretch;
@@ -84,16 +85,17 @@ const MiniMessageStyle = styled.div`
     }
 
     .mini-text{
-      padding: 1rem;
-      font-size: 1rem;
+      padding: 1pc;
+      font-size: 1pc;
       display: flex;
       align-items: center;
       justify-content: center;
       max-width: 50vw;
+      text-align: center;
     }
 
     .mini-icon{
-      padding: 1rem;
+      padding: 1pc;
       display: flex;
       align-items: center;
       justify-content: center;

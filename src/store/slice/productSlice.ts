@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 
-const taskSlice = createSlice({
+const productSlice = createSlice({
 
   name: "product",
 
@@ -51,6 +51,6 @@ const taskSlice = createSlice({
 
 })
 
-export default taskSlice.reducer;
+export default productSlice.reducer;
 
-export const { loadingMultiProductList, setMultiProductList } = taskSlice.actions
+export const { loadingMultiProductList, setMultiProductList } = productSlice.actions

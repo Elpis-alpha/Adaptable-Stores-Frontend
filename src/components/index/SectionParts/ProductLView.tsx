@@ -6,18 +6,34 @@ import { SpinnerDiamond, SpinnerCircular } from "spinners-react";
 
 import { useEffect, useRef, useState } from "react";
 
-import { getItemPicture } from "../../../api";
+import { getItemPicture, addItemToCart as addItemToCartP } from "../../../api";
 
 import { FaCamera } from "react-icons/fa";
 
+import { postApiJson } from "../../../controllers/APICtrl";
+
+import { sendMiniMessage } from "../../../controllers/MessageCtrl";
+
+import { setCartData } from "../../../store/slice/cartSlice";
+
+import { useDispatch, useSelector } from "react-redux";
+
 
 const ProductLView = ({ productData }: any) => {
+
+  const dispatch = useDispatch()
+
+  const leftSideRef = useRef(null)
 
   const { _id, title, description, price, section, pics } = productData
 
   const [startedLoadingPic, setStartedLoadingPic] = useState(false)
 
-  const leftSideRef = useRef(null)
+  const saveCartData = (cartData: any) => dispatch(setCartData(cartData))
+
+  const { data: cartData } = useSelector((store: any) => store.cart)
+
+  const numberInCart = cartData?.items?.find((item: any) => item.productID === productData._id)?.quantity
 
   useEffect(() => {
 
@@ -113,12 +129,42 @@ const ProductLView = ({ productData }: any) => {
 
   }, [pics, section, _id, title, startedLoadingPic])
 
-  const addItemToCart = (e: any) => {
+  const addItemToCart = async (e: any) => {
 
     e.preventDefault()
 
+    const holder = (e.currentTarget.parentElement as HTMLElement)
+
     // adding a class of 'l' will change the text to adding
-    e.currentTarget.parentElement.classList.add('l')
+    holder.classList.add('l')
+
+    const cartData = await postApiJson(addItemToCartP(), { _id: productData._id, qty: 1 })
+
+    if (cartData.error) {
+
+      sendMiniMessage({
+
+        icon: { name: "times" },
+
+        content: { text: "An Error Occured!" }
+
+      }, 2000)
+
+    } else {
+
+      sendMiniMessage({
+
+        icon: { name: "ok" },
+
+        content: { text: "Product Added!" }
+
+      }, 2000)
+
+      saveCartData(cartData)
+
+    }
+
+    holder.classList.remove('l')
 
   }
 
@@ -158,9 +204,9 @@ const ProductLView = ({ productData }: any) => {
 
                 <span className="ad-cart" title={`Add ${title} to cart`}>
 
-                  <span className="init" onClick={addItemToCart}>Add to Cart</span>
+                  <span className="init" onClick={addItemToCart}>Add to Cart {numberInCart && <span className="in-cart">{numberInCart}</span>}</span>
 
-                  <span className="load">Adding <SpinnerCircular size=".9pc" color="white" secondaryColor="#a2a2a2" style={{marginLeft: ".2pc"}} /></span>
+                  <span className="load">Adding <SpinnerCircular size=".9pc" color="white" secondaryColor="#a2a2a2" style={{ marginLeft: ".2pc" }} /></span>
 
                 </span>
 
@@ -322,7 +368,7 @@ const ProductLViewStyle = styled.div`
               color: white;
               line-height: .9pc;
               
-              span {
+              >span {
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -330,6 +376,22 @@ const ProductLViewStyle = styled.div`
                 
                 &.load {
                   display: none;
+                }
+                
+                &.init {
+
+                  >.in-cart {
+                    position: absolute;
+                    top: -.5pc; right: -.5pc;
+                    background: orangered;
+                    font-size: .7pc;
+                    line-height: 1pc;
+                    width: 1pc;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                  }
                 }
               }
 

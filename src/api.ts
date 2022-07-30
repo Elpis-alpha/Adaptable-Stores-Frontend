@@ -44,3 +44,10 @@ export const getItemPicture = (itemID: string, picID: string) => {
 
 }
 
+
+// Cart Routes
+export const getCart = () => `${backendLocation}/api/cart/get`
+
+export const addItemToCart = () => `${backendLocation}/api/cart/add`
+
+export const removeItemFromCart = () => `${backendLocation}/api/cart/remove`

@@ -1,6 +1,11 @@
 import { useEffect } from 'react';
 
 import { Route, Routes, useLocation } from 'react-router-dom';
+
+import Cart from './components/cart/Cart';
+
+import FetchAppData from './components/general/FetchAppData';
+
 import NavBar from './components/general/NavBar';
 
 import { processCookies } from './controllers/GeneralCtrl';
@@ -26,6 +31,8 @@ const App = () => {
 
     <div className="App">
 
+      <FetchAppData />
+
       <NavBar />
 
       <Routes location={location} key={location.pathname}>
@@ -41,6 +48,8 @@ const App = () => {
         <Route path='*' element={<PageNotFound />} />
 
       </Routes>
+
+      <Cart />
 
     </div>
 

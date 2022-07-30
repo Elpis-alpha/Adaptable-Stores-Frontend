@@ -81,23 +81,23 @@ const XMessageStyle = styled.div`
     text-align: center;
     background-color: #e0e0e0;
     display: flex;
-    border-radius: 1rem;
-    padding: 1.5rem 2rem;
+    border-radius: 1pc;
+    padding: 1.5pc 2pc;
     width: 80vw;
     max-height: 70vh;
     overflow: auto;
-    font-size: 1rem;
+    font-size: 1pc;
     transform: scale(1);
     transition: transform .1s;
     flex-direction: column;
-    line-height: 2rem;
+    line-height: 2pc;
     animation: slide-in-x-message-left 1s 1 ease-out;
     justify-content: flex-start;
     background: linear-gradient(145deg, #cacaca, #f0f0f0);
     box-shadow: 10px 10px 20px #7f7f7f, -10px -10px 20px #bdbdbd;
 
     .heading{
-      font-size: 1.5rem;
+      font-size: 1.5pc;
       font-weight: bold;
     }
 

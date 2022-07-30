@@ -602,6 +602,16 @@ export const capitalize = (str: string) => {
 
 }
 
+export const apostrophifyName = (name: string) => {
+
+  const end = name.length - 1
+
+  if (name[end] === 's') return name + "'"
+
+  else return name + "'s"
+
+}
+
 export const reformImage = (e: any, removeNext: boolean = true) => {
 
   const smallSize = e.currentTarget
@@ -635,7 +645,7 @@ export const reformImage = (e: any, removeNext: boolean = true) => {
 export const getQueryObject = (href = window?.location?.href) => {
 
   const params = (new URL(href)).searchParams;
-  
+
   const urlParams: any = {}
 
   // @ts-ignore

@@ -39,6 +39,8 @@ const userSlice = createSlice({
 
       state.available = false
 
+      state.tested = true
+
     },
 
   }
