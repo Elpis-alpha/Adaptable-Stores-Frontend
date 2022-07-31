@@ -26,6 +26,7 @@ import { setUserData } from '../store/slice/userSlice'
 import { sendMiniMessage } from '../controllers/MessageCtrl'
 
 import { siteName, tokenCookieName } from '../__env'
+import { setRefetchCart } from '../store/slice/cartSlice'
 
 
 const SignupPage = () => {
@@ -223,6 +224,8 @@ const SignupPage = () => {
     } else {
 
       dispatch(setUserData({ ...userCreationData.user, token: userCreationData.token }))
+
+      dispatch(setRefetchCart(true))
 
       cookie.set(tokenCookieName, userCreationData.token, { path: '/', expires: new Date(90 ** 7) })
 

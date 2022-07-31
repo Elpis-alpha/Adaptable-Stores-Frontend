@@ -1,12 +1,12 @@
 import styled from "styled-components"
 
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import Parse from "html-react-parser"
 
-import { siteName } from "../../__env"
+import { siteName, tokenCookieName } from "../../__env"
 
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 import { Squeeze as Hamburger } from "hamburger-react"
 
@@ -17,9 +17,21 @@ import { useState } from "react"
 import { waitFor } from "../../controllers/TimeCtrl"
 
 import { stateClass } from "../../controllers/UICtrl"
+import Cookies from "universal-cookie"
+import { sendMiniMessage, sendXMessage } from "../../controllers/MessageCtrl"
+import { logoutUser } from "../../api"
+import { postApiJson } from "../../controllers/APICtrl"
+import { removeUserData } from "../../store/slice/userSlice"
+import { removeCartData } from "../../store/slice/cartSlice"
 
 
 const NavBar = () => {
+
+  const navigate = useNavigate()
+
+  const cookies = new Cookies()
+
+  const dispatch = useDispatch()
 
   const { available } = useSelector((store: any) => store.user)
 
@@ -56,6 +68,76 @@ const NavBar = () => {
 
   }
 
+  const logoutThisUser = async (e: any) => {
+
+    e.preventDefault()
+
+    toggleNav(false)
+
+    const res = await sendXMessage({
+
+      heading: { text: "Confirm Logout" },
+
+      buttons: [
+
+        // @ts-ignore
+        { text: 'Yes, Logout', waitFor: 'se', style: { backgroundColor: 'darkred' } },
+
+        // @ts-ignore
+        { text: 'Go Back', waitFor: 're', style: { backgroundColor: '#607d8b' } },
+
+      ],
+
+    })
+
+    if (res !== "se") return false
+
+    sendMiniMessage({
+
+      icon: { name: "loading", style: {} },
+
+      content: { text: "Logging Out!", style: {} },
+
+      style: {}
+
+    })
+
+    const logoutData = await postApiJson(logoutUser())
+
+    if (logoutData.error) {
+
+      sendMiniMessage({
+
+        icon: { name: "times", style: {} },
+
+        content: { text: "An Error Occured!", style: {} },
+
+        style: {}
+
+      }, 2000)
+
+    } else {
+
+      sendMiniMessage({
+
+        icon: { name: "ok" },
+
+        content: { text: "Logged Out!" }
+
+      }, 2000)
+
+      cookies.remove(tokenCookieName, { path: '/' })
+
+      dispatch(removeUserData())
+
+      dispatch(removeCartData())
+
+      navigate("/login")
+
+    }
+
+  }
+
   return (
 
     <NavBarStyle style={{ zIndex: (navOpen || navClosing) ? 80 : 30 }}>
@@ -80,7 +162,7 @@ const NavBar = () => {
 
                 <li><Link to="/profile" onClick={() => toggleNav(false)}>Profile</Link></li>
 
-                <li><Link to="/logout" onClick={() => toggleNav(false)}>Logout</Link></li>
+                <li><Link to="/signup" onClick={logoutThisUser}>Logout</Link></li>
 
               </ul>
 

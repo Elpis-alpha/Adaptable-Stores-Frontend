@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 
@@ -6,7 +6,7 @@ import { getCart, getUser } from "../../api";
 
 import { getApiJson } from "../../controllers/APICtrl";
 
-import { removeCartData, setCartData } from "../../store/slice/cartSlice";
+import { removeCartData, setCartData, setRefetchCart } from "../../store/slice/cartSlice";
 
 import { removeUserData, setUserData } from "../../store/slice/userSlice";
 
@@ -17,20 +17,18 @@ const FetchBaseData = () => {
 
   const { available } = useSelector((store: any) => store.user)
 
-  const { available: cartAvailable } = useSelector((store: any) => store.cart)
-
-  const [userFetchedHere, setUserFetchedHere] = useState(false)
+  const { refetchCart } = useSelector((store: any) => store.cart)
 
   useEffect(() => {
 
     // Fetch User Data
     const fetchUser = async () => {
 
-      setUserFetchedHere(true)
+      dispatch(setRefetchCart(false))
 
       const userData = await getApiJson(getUser())
 
-      if (userData.error) { setUserFetchedHere(false); dispatch(removeUserData()) }
+      if (userData.error) dispatch(removeUserData()) 
 
       else dispatch(setUserData(userData))
 
@@ -58,6 +56,8 @@ const FetchBaseData = () => {
     // Fetch Cart Data
     const fetchCartData = async () => {
 
+      dispatch(setRefetchCart(false))
+
       const cartData = await getApiJson(getCart())
 
       if (cartData.error) dispatch(removeCartData())
@@ -66,9 +66,9 @@ const FetchBaseData = () => {
 
     }
 
-    if (available && !userFetchedHere && !cartAvailable) fetchCartData()
+    if (available && refetchCart) fetchCartData()
 
-  }, [dispatch, userFetchedHere, available, cartAvailable])
+  }, [dispatch, available, refetchCart])
 
   return <></>
 

@@ -62,7 +62,7 @@ const XMessageStyle = styled.div`
   position: fixed;
   right: 0; top: 0;
   bottom: 0; left: 0;
-  z-index: 40;
+  z-index: 200;
   align-items: center;
   justify-content: center;
   width: 100vw;

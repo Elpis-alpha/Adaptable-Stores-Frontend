@@ -15,7 +15,9 @@ const cartSlice = createSlice({
 
     available: false,
 
-    tested: false
+    tested: false,
+
+    refetchCart: false
 
   },
 
@@ -30,6 +32,8 @@ const cartSlice = createSlice({
       state.tested = true
 
       state.available = true
+
+      state.refetchCart = false
 
     },
 
@@ -49,6 +53,14 @@ const cartSlice = createSlice({
 
       state.newlyAdded = 0
 
+      state.refetchCart = false
+
+    },
+
+    setRefetchCart: (state, { payload }) => {
+
+      state.refetchCart = payload
+
     },
 
   }
@@ -57,4 +69,4 @@ const cartSlice = createSlice({
 
 export default cartSlice.reducer;
 
-export const { removeCartData, setCartData, setCartTest } = cartSlice.actions
+export const { removeCartData, setCartData, setCartTest, setRefetchCart } = cartSlice.actions
