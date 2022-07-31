@@ -17,6 +17,10 @@ const cartSlice = createSlice({
 
     tested: false,
 
+    // This is used to determine weather or not the cart data should be refetched in the FetchAppData Component
+
+    // It is set to true in the login and sign up pages so that the cart will be refetched 
+
     refetchCart: false
 
   },
