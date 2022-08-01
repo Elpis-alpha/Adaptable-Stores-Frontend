@@ -2,11 +2,13 @@ import { useState } from "react"
 
 import { FaSearch, FaTimes } from "react-icons/fa"
 
+import { useSelector } from "react-redux"
+
 import { useNavigate } from "react-router-dom"
 
 import styled from "styled-components"
 
-import { createQueryString, getQueryObject } from "../../../controllers/SpecialCtrl"
+import { createQueryString } from "../../../controllers/SpecialCtrl"
 
 
 const FilterQuery = () => {
@@ -15,7 +17,9 @@ const FilterQuery = () => {
 
   const [searchValue, setSearchValue] = useState("")
 
-  const { view } = getQueryObject()
+  const { queryObject } = useSelector((store: any) => store.query)
+
+  const { view } = queryObject
 
   const filterHandler = (e: React.FormEvent<HTMLFormElement>) => {
 

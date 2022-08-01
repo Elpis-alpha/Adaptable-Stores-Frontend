@@ -4,6 +4,8 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import Cart from './components/cart/Cart';
 
+import ConfigureQuery from './components/general/ConfigureQuery';
+
 import FetchAppData from './components/general/FetchAppData';
 
 import NavBar from './components/general/NavBar';
@@ -32,6 +34,8 @@ const App = () => {
     <div className="App">
 
       <FetchAppData />
+
+      <ConfigureQuery />
 
       <NavBar />
 

@@ -8,14 +8,18 @@ import IndexQuery from "../components/index/IndexQuery"
 
 import IndexSection from "../components/index/IndexSection"
 
-import { getQueryObject, createQueryString } from "../controllers/SpecialCtrl"
+import { createQueryString } from "../controllers/SpecialCtrl"
+
+import { useSelector } from "react-redux"
 
 
 const IndexPage = () => {
 
   const navigate = useRef(useNavigate())
 
-  const { view } = getQueryObject()
+  const { queryObject } = useSelector((store: any) => store.query)
+
+  const { view } = queryObject
 
   const locationOptions = useMemo(() => ['query', 'section:all', 'section:cloth', 'section:book', 'section:shoe', 'section:cosmetic'], [])
 

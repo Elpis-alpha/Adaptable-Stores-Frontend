@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+import AbsoluteProduct from "../product/AbsoluteProduct"
+
 import FilterQuery from "./SectionParts/FilterQuery"
 
 import ProductList from "./SectionParts/ProductList"
@@ -20,6 +22,8 @@ const IndexSection = () => {
         <FilterQuery />
 
         <ProductList />
+
+        <AbsoluteProduct />
 
       </div>
 

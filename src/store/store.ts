@@ -10,6 +10,8 @@ import displaySlice from "./slice/displaySlice";
 
 import cartSlice from "./slice/cartSlice";
 
+import querySlice from "./slice/querySlice";
+
 
 const store = configureStore({
 
@@ -24,6 +26,8 @@ const store = configureStore({
     display: displaySlice,
 
     cart: cartSlice,
+
+    query: querySlice
 
   }
 

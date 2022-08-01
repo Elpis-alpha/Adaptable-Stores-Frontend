@@ -64,7 +64,7 @@ const Cart = () => {
 
   return (
 
-    <CartStyle className={cartShowClass} onClick={displayCart}>
+    <CartStyle className={cartShowClass + ' top-cArT'} onClick={displayCart}>
 
       <div className="button-part">
 

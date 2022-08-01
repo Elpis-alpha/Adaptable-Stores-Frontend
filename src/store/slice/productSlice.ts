@@ -7,6 +7,12 @@ const productSlice = createSlice({
 
   initialState: {
 
+    singleProductDimensions: {
+
+      transformOrigin: "50vh 50vh"
+
+    },
+
     singleProduct: {
 
       available: false,
@@ -47,10 +53,22 @@ const productSlice = createSlice({
 
     },
 
+    setSingleProductDimensions: (state, { payload }) => {
+
+      state.singleProductDimensions.transformOrigin = `${payload.left + (payload.width / 2)}px ${payload.top + (payload.height / 2)}px`
+
+    },
+
+    setSingleProduct: (state, { payload }) => {
+
+      state.singleProduct = payload
+
+    },
+
   }
 
 })
 
 export default productSlice.reducer;
 
-export const { loadingMultiProductList, setMultiProductList } = productSlice.actions
+export const { loadingMultiProductList, setMultiProductList, setSingleProduct, setSingleProductDimensions } = productSlice.actions

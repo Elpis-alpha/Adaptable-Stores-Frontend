@@ -18,8 +18,12 @@ import { setCartData } from "../../../store/slice/cartSlice";
 
 import { useDispatch, useSelector } from "react-redux";
 
+import { createQueryString } from "../../../controllers/SpecialCtrl";
 
-const ProductLView = ({ productData }: any) => {
+import { setSingleProductDimensions } from "../../../store/slice/productSlice";
+
+
+const ProductLView = ({ productData, queryObject }: any) => {
 
   const dispatch = useDispatch()
 
@@ -168,13 +172,23 @@ const ProductLView = ({ productData }: any) => {
 
   }
 
+  const setProductDimensions = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+
+    const productBox = e.currentTarget
+
+    const { top, left, width, height } = productBox.getBoundingClientRect()
+
+    dispatch(setSingleProductDimensions({ top, left, width, height }))
+
+  }
+
   return (
 
     <ProductLViewStyle>
 
       <div className="pl-item">
 
-        <Link to={`/product?id=${_id}`} className="pl-content" title={"Click to open a detailed view on this product"}>
+        <Link to={createQueryString({ ...queryObject, product: _id })} className="pl-content" onClick={setProductDimensions} title={"Click to open a detailed view on this product"}>
 
           <div className="inner">
 

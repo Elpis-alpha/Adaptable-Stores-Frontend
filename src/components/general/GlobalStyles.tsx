@@ -193,6 +193,10 @@ body > #root > .App {
   > div {
     z-index: 50;
   }
+
+  >.top-cArT {
+    z-index: 80;
+  }
 }
 
 .absolute-invisibility{

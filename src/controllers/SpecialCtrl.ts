@@ -663,7 +663,7 @@ export const createQueryString = (queryObject: any) => {
 
   let queryString = "?"
 
-  const queryKeys = Object.keys(queryObject)
+  const queryKeys = Object.keys(queryObject).filter((key: string) => queryObject[key])
 
   for (const queryName of queryKeys) {
 

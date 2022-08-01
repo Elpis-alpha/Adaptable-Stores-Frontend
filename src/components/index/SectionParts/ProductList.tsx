@@ -10,8 +10,6 @@ import { getAllItems } from "../../../api"
 
 import ProductLView from "./ProductLView"
 
-import { getQueryObject } from "../../../controllers/SpecialCtrl"
-
 import { loadingMultiProductList, setMultiProductList } from "../../../store/slice/productSlice"
 
 import { reterieveSectionName } from "../../../controllers/GeneralCtrl"
@@ -21,7 +19,9 @@ const ProductList = () => {
 
   const dispatch = useDispatch()
 
-  const { view, search, count } = getQueryObject()
+  const { queryObject } = useSelector((store: any) => store.query)
+
+  const { view, search, count } = queryObject
 
   const { multiProduct } = useSelector((store: any) => store.product)
 
@@ -57,7 +57,7 @@ const ProductList = () => {
 
               loading: false,
 
-              queryData: getQueryObject(),
+              queryData: queryObject,
 
               data: productData
 
@@ -91,7 +91,7 @@ const ProductList = () => {
 
               loading: false,
 
-              queryData: getQueryObject(),
+              queryData: queryObject,
 
               data: productData
 
@@ -107,7 +107,7 @@ const ProductList = () => {
 
     initialFetch()
 
-  }, [dispatch, count, queryData, search, view])
+  }, [dispatch, count, queryData, search, view, queryObject])
 
 
   return (
@@ -116,7 +116,7 @@ const ProductList = () => {
 
       {(!loading && data.length > 0 && available) && <div className="p-l-container">
 
-        {data.map((product: any) => <ProductLView key={product._id} productData={product} />)}
+        {data.map((product: any) => <ProductLView key={product._id} productData={product} queryObject={queryObject} />)}
 
       </div>}
 
