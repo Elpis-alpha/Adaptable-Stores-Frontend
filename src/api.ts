@@ -44,6 +44,9 @@ export const getItemPicture = (itemID: string, picID: string) => {
 
 }
 
+export const getProduct = (productID: string) =>  `${backendLocation}/api/items/get?_id=${productID}`
+
+
 
 // Cart Routes
 export const getCart = () => `${backendLocation}/api/cart/get`

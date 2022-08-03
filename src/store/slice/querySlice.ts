@@ -6,7 +6,9 @@ const querySlice = createSlice({
 
   initialState: {
 
-    queryObject: {}
+    queryObject: {},
+
+    active: false,
 
   },
 
@@ -15,6 +17,8 @@ const querySlice = createSlice({
     setQueryObject: (state, { payload }) => {
 
       state.queryObject = payload
+
+      state.active = true
 
     },
   },

@@ -59,6 +59,12 @@ const productSlice = createSlice({
 
     },
 
+    loadingSingleProduct: (state, { payload }) => {
+
+      state.singleProduct.loading = payload
+
+    },
+
     setSingleProduct: (state, { payload }) => {
 
       state.singleProduct = payload
@@ -71,4 +77,4 @@ const productSlice = createSlice({
 
 export default productSlice.reducer;
 
-export const { loadingMultiProductList, setMultiProductList, setSingleProduct, setSingleProductDimensions } = productSlice.actions
+export const { loadingMultiProductList, setMultiProductList, setSingleProduct, setSingleProductDimensions, loadingSingleProduct } = productSlice.actions

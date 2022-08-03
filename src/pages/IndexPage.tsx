@@ -17,7 +17,7 @@ const IndexPage = () => {
 
   const navigate = useRef(useNavigate())
 
-  const { queryObject } = useSelector((store: any) => store.query)
+  const { queryObject, active } = useSelector((store: any) => store.query)
 
   const { view } = queryObject
 
@@ -26,9 +26,9 @@ const IndexPage = () => {
   // Sets the value of display string and ensures the query string is valid 
   useEffect(() => {
 
-    if (!locationOptions.includes(view)) navigate.current(createQueryString({ view: 'query' }), { replace: true })
+    if (!locationOptions.includes(view) && active) navigate.current(createQueryString({ view: 'query' }), { replace: true })
 
-  }, [view, locationOptions])
+  }, [view, locationOptions, active])
 
 
   return (
