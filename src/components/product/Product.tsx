@@ -1,8 +1,42 @@
 import styled from "styled-components"
+import ImageGallery from "react-image-gallery"
+import { getItemPicture } from "../../api";
+import { useEffect, useState } from "react";
+
 
 const Product = ({ productData }: { productData: any }) => {
 
-  const { title, description, price } = productData
+  const { _id, title, description, price, pics, section } = productData
+
+  const [imageArray, setImageArray] = useState([])
+
+  useEffect(() => {
+
+    setImageArray(pics.map((pic: any) => {
+
+      return {
+
+        original: getItemPicture(_id, pic.picID),
+
+        thumbnail: getItemPicture(_id, pic.picID),
+
+        originalHeight: 300, thumbnailHeight: 80
+
+      }
+
+    }).concat({
+
+      original: `/images/default/${section.toLowerCase()}.png`,
+
+      thumbnail: `/images/default/${section.toLowerCase()}.png`,
+
+      originalHeight: 300, thumbnailHeight: 80
+
+    }))
+
+  }, [_id, pics, section])
+
+
 
   return (
 
@@ -18,7 +52,11 @@ const Product = ({ productData }: { productData: any }) => {
 
         <div className="pics">
 
-          All the pictures
+          <div className="in-pics">
+
+            <ImageGallery items={imageArray} showIndex={true} showThumbnails={false} showBullets={true} showFullscreenButton={false} />
+
+          </div>
 
         </div>
 
@@ -66,11 +104,18 @@ const ProductStyle = styled.div`
 
     .heading {
       width: 100%;
+      padding-bottom: 1pc;
       
       h3 {
         font-size: 2pc;
         line-height: 3pc;
       }
+    }
+
+    .pics {
+      width: 100%;
+      background-color: rgba(0,0,0,.01);
+      background: radial-gradient(rgba(0,0,0,.2), #fff, #fff);
     }
   }
 `

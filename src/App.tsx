@@ -22,6 +22,8 @@ import ProductPage from './pages/ProductPage';
 
 import SignupPage from './pages/SignupPage';
 
+import "react-image-gallery/styles/css/image-gallery.css";
+
 
 const App = () => {
 

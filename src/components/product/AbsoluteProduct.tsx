@@ -207,6 +207,7 @@ const AbsoluteProductStyle = styled.div`
     display: flex;
     transform: scale(1);
     cursor: pointer;
+    z-index: 150;
     transition: transform .5s;
 
     @media screen and (max-width: 900px) { top: 1.5pc; right: 1.5pc; }
