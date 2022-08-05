@@ -62,7 +62,7 @@ const MiniMessageStyle = styled.div`
   right: 0;
   left: 0; 
   bottom: 1pc;
-  z-index: 50;
+  z-index: 550;
   margin: 1pc auto;
   display: none;
   align-items: center;

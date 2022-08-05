@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { FaTimes } from "react-icons/fa";
 
 import { useDispatch, useSelector } from "react-redux";
+
 import { Link } from "react-router-dom";
 
 import styled from "styled-components";
@@ -14,12 +15,15 @@ import { deleteApiJson, postApiFormData, postApiJson } from "../../controllers/A
 import { sendMiniMessage } from "../../controllers/MessageCtrl";
 
 import { apostrophifyName } from "../../controllers/SpecialCtrl";
+
 import { setCartData } from "../../store/slice/cartSlice";
 
 
 const CartView = ({ cartData, goBack }: { cartData: any, goBack: any }) => {
 
   const dispatch = useDispatch()
+
+  const ulRef = useRef(null)
 
   const { data: userData } = useSelector((store: any) => store.user)
 
@@ -272,6 +276,32 @@ const CartView = ({ cartData, goBack }: { cartData: any, goBack: any }) => {
 
   }
 
+  const beginCheckout = async (e: any) => {
+
+    if (cartData.items.length < 1) {
+
+      sendMiniMessage({
+
+        icon: { name: "times" },
+
+        content: { text: "Cart is Empty!" }
+
+      }, 2000)
+
+    }
+
+    const getBottom = (item: any) => item.getBoundingClientRect().bottom
+
+    if (Math.abs(getBottom(ulRef.current) - getBottom((ulRef.current as any)?.parentElement)) > 25) {
+
+      return (ulRef.current as any).lastChild.scrollIntoView();
+      
+    }
+
+    console.log('Checkking outt.....');
+
+  }
+
   return (
 
     <CartViewStyle>
@@ -298,9 +328,9 @@ const CartView = ({ cartData, goBack }: { cartData: any, goBack: any }) => {
 
       <div className="body">
 
-        {cartData.items.length === 0 && <div className="empt">No item in cart</div>}
+        <ul ref={ulRef}>
 
-        <ul>
+          {cartData.items.length === 0 && <div className="empt">No item in cart</div>}
 
           {cartData.items.map((cartItem: any) => <li key={cartItem._id}>
 
@@ -332,6 +362,14 @@ const CartView = ({ cartData, goBack }: { cartData: any, goBack: any }) => {
 
           </li>)}
 
+          {cartData.items.length > 0 && <div className="total">
+
+            <span>Total:</span>
+
+            <span>${cartData.items.reduce((tot: any, x: any) => { return tot + x.price }, 0)}</span>
+
+          </div>}
+
         </ul>
 
       </div>
@@ -340,7 +378,7 @@ const CartView = ({ cartData, goBack }: { cartData: any, goBack: any }) => {
 
         <button className="back" onClick={() => goBack()}>Back</button>
 
-        <button className="order">Checkout</button>
+        <button className="order" onClick={beginCheckout}>Checkout</button>
 
       </div>
 
@@ -434,12 +472,18 @@ const CartViewStyle = styled.div`
     margin: 0 auto;
     flex: 1;
     overflow: auto;
-
+    
     ul {
       padding: 0 .5pc;
       padding-top: 0.2pc;
+      min-height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-direction: column;
 
       li {
+        width: 100%;
         list-style-type: none;
         margin-bottom: 1pc;
         padding: .5pc 1pc;
@@ -525,6 +569,23 @@ const CartViewStyle = styled.div`
             }
           }
         }
+      }
+
+      .total {
+        width: 100%;
+        margin-top: auto;
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        font-size: 2pc;
+        line-height: 3pc;
+      }
+
+      .empt {
+        /* font-size: 1.5pc; */
+        font-style: italic;
+        text-align: center;
+        margin: auto;
       }
     }
 

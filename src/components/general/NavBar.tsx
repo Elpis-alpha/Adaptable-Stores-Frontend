@@ -160,8 +160,6 @@ const NavBar = () => {
 
                 <li className="only-small"><Link to="/?view=query" onClick={() => toggleNav(false)}>Home</Link></li>
 
-                <li><Link to="/profile" onClick={() => toggleNav(false)}>Profile</Link></li>
-
                 <li><Link to="/signup" onClick={logoutThisUser}>Logout</Link></li>
 
               </ul>

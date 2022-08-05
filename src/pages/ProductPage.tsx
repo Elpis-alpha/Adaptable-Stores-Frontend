@@ -107,6 +107,7 @@ const ProductPage = () => {
 }
 
 const ProductPageStyle = styled.div`
+  width: 100%;
   
   &.product-page > div > div.in-pro {
     border: 0 none;

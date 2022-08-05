@@ -16,6 +16,9 @@ import { sendMiniMessage } from "../../controllers/MessageCtrl";
 
 import { setCartData } from "../../store/slice/cartSlice";
 
+import { FiExternalLink } from "react-icons/fi";
+import { Link } from "react-router-dom";
+
 
 const Product = ({ productData, full }: { productData: any, full: boolean }) => {
 
@@ -119,7 +122,7 @@ const Product = ({ productData, full }: { productData: any, full: boolean }) => 
 
         <div className="heading">
 
-          <h3>{title}</h3>
+          <h3>{title}{!full && <Link target="_blank" to={`/product?product=${_id}`}><FiExternalLink /></Link>}</h3>
 
         </div>
 
@@ -189,6 +192,21 @@ const ProductStyle = styled.div`
       h3 {
         font-size: 2pc;
         line-height: 3pc;
+        /* display: inline-flex; */
+        /* align-items: stretch; */
+        width: 100%;
+        
+        a {
+          display: inline-flex;
+          padding-left: 0.4pc;
+          height: 2.5pc;
+          align-items: center;
+          color: #4a5c92;
+
+          svg {
+            display: inline-flex;
+          }
+        }
       }
     }
 
