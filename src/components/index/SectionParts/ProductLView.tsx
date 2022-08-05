@@ -146,13 +146,29 @@ const ProductLView = ({ productData, queryObject }: any) => {
 
     if (cartData.error) {
 
-      sendMiniMessage({
+      console.log(cartData);
 
-        icon: { name: "times" },
+      if (cartData.error === "Not Authenticated") {
 
-        content: { text: "An Error Occured!" }
+        sendMiniMessage({
 
-      }, 2000)
+          icon: { name: "times" },
+
+          content: { text: "You are not signed in!" }
+
+        }, 2000)
+
+      } else {
+
+        sendMiniMessage({
+
+          icon: { name: "times" },
+
+          content: { text: "An Error Occured!" }
+
+        }, 2000)
+
+      }
 
     } else {
 

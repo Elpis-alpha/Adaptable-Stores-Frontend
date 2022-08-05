@@ -324,7 +324,7 @@ const CartView = ({ cartData, goBack }: { cartData: any, goBack: any }) => {
 
             <div className="li-end">
 
-              <Link target="_blank" to={`/product?id=${cartItem._id}`}>View Item</Link>
+              <Link target="_blank" to={`/product?product=${cartItem.productID}`}>View Item</Link>
 
               <button onClick={() => reduceCartItemByOne(cartItem, true)}>Remove</button>
 

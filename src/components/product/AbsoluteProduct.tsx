@@ -143,7 +143,7 @@ const AbsoluteProduct = () => {
 
         <div className="product-holder">
 
-          {available && <Product productData={productData} />}
+          {available && <Product productData={productData} full={false} />}
 
           {loading && <>Product is still loading</>}
 
@@ -188,33 +188,31 @@ const AbsoluteProductStyle = styled.div`
     }
   }
 
-  .inner-abs {  
+  .inner-abs {
     background-color: #fff;
-    border-radius: 1.5pc;
+    /* border-radius: 1.5pc; */
     overflow: hidden;
     
     .product-holder {
       width: 80vw;
       max-height: 80vh;
       overflow: auto;
-      padding: 2pc;
+      z-index: 50;
+      padding: 1pc;
     }
-  }
-
-  .cancel-x {
-    position: absolute;
-    top: 2pc; right: 2pc;
-    display: flex;
-    transform: scale(1);
-    cursor: pointer;
-    z-index: 150;
-    transition: transform .5s;
-
-    @media screen and (max-width: 900px) { top: 1.5pc; right: 1.5pc; }
-    @media screen and (max-width: 650px) { top: 1pc; right: 1pc; }
-    
-    &:hover {
-      transform: scale(1.5);
+  
+    .cancel-x {
+      position: absolute;
+      top: 1.8pc; right: 2pc;
+      display: flex;
+      transform: scale(1);
+      cursor: pointer;
+      z-index: 150;
+      transition: transform .5s;
+  
+      &:hover {
+        transform: scale(1.5);
+      }
     }
   }
 `
