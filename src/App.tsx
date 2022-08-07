@@ -4,6 +4,8 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 
 import Cart from './components/cart/Cart';
 
+import Checkout from './components/checkout/Checkout';
+
 import ConfigureQuery from './components/general/ConfigureQuery';
 
 import FetchAppData from './components/general/FetchAppData';
@@ -56,6 +58,8 @@ const App = () => {
       </Routes>
 
       <Cart />
+
+      <Checkout />
 
     </div>
 

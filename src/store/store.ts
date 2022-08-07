@@ -12,6 +12,8 @@ import cartSlice from "./slice/cartSlice";
 
 import querySlice from "./slice/querySlice";
 
+import checkoutSlice from "./slice/checkoutSlice";
+
 
 const store = configureStore({
 
@@ -27,7 +29,9 @@ const store = configureStore({
 
     cart: cartSlice,
 
-    query: querySlice
+    query: querySlice,
+
+    checkout: checkoutSlice
 
   }
 

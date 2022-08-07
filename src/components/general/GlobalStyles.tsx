@@ -197,6 +197,10 @@ body > #root > .App {
   >.top-cArT {
     z-index: 80;
   }
+
+  >.ck-ot {
+    z-index: 90;
+  }
 }
 
 .absolute-invisibility{

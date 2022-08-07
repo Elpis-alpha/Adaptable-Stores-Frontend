@@ -17,6 +17,7 @@ import { sendMiniMessage } from "../../controllers/MessageCtrl";
 import { apostrophifyName } from "../../controllers/SpecialCtrl";
 
 import { setCartData } from "../../store/slice/cartSlice";
+import { setCheckoutData } from "../../store/slice/checkoutSlice";
 
 
 const CartView = ({ cartData, goBack }: { cartData: any, goBack: any }) => {
@@ -278,6 +279,8 @@ const CartView = ({ cartData, goBack }: { cartData: any, goBack: any }) => {
 
   const beginCheckout = async (e: any) => {
 
+    const ulElement: any = ulRef.current
+
     if (cartData.items.length < 1) {
 
       sendMiniMessage({
@@ -292,13 +295,15 @@ const CartView = ({ cartData, goBack }: { cartData: any, goBack: any }) => {
 
     const getBottom = (item: any) => item.getBoundingClientRect().bottom
 
-    if (Math.abs(getBottom(ulRef.current) - getBottom((ulRef.current as any)?.parentElement)) > 25) {
+    if (Math.abs(getBottom(ulElement) - getBottom(ulElement?.parentElement)) > 25) {
 
-      return (ulRef.current as any).lastChild.scrollIntoView();
+      return ulElement.parentElement.scrollBy({ top: ulElement.scrollHeight, left: 0, behavior: 'smooth' });
       
     }
-
-    console.log('Checkking outt.....');
+    
+    dispatch(setCheckoutData(cartData.items))
+    
+    goBack() // Proceed to checkout
 
   }
 
