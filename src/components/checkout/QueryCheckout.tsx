@@ -29,7 +29,7 @@ const QueryCheckout = ({ setCheckoutState }: { setCheckoutState: any }) => {
 
       <div className="end">
 
-        <button onClick={() => setCheckoutState("query")}>Back</button>
+        <button onClick={() => setCheckoutState("disclaimer")}>Back</button>
 
       </div>
 

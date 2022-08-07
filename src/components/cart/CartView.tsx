@@ -283,7 +283,7 @@ const CartView = ({ cartData, goBack }: { cartData: any, goBack: any }) => {
 
     if (cartData.items.length < 1) {
 
-      sendMiniMessage({
+      return sendMiniMessage({
 
         icon: { name: "times" },
 

@@ -21,3 +21,7 @@ export const backendLocation = process.env.REACT_APP_BACK_END
 export const isProduction = process.env.REACT_APP_IS_PRODUCTION === "true"
 
 export const complain = `${process.env.REACT_APP_BACK_END}/complain`
+
+export const stripeKey: any = process.env.REACT_APP_STRIPE_KEY
+
+export const paypalKey: any = process.env.REACT_APP_PAYPAL_ID

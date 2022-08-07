@@ -54,3 +54,11 @@ export const getCart = () => `${backendLocation}/api/cart/get`
 export const addItemToCart = () => `${backendLocation}/api/cart/add`
 
 export const removeItemFromCart = () => `${backendLocation}/api/cart/remove`
+
+
+// Order Routes
+export const getOrder = () => `${backendLocation}/api/order/get`
+
+export const createPaypalOrder = () => `${backendLocation}/api/order/add-paypal`
+
+export const createStripeOrder = () => `${backendLocation}/api/order/add-stripe`

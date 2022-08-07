@@ -17,35 +17,47 @@ const ViewItemsCheckout = ({ checkoutData, setCheckoutState }: { checkoutData: a
 
         <table>
 
-          <tr>
+          <thead>
 
-            <th>Name</th>
+            <tr>
 
-            <th>Qty</th>
+              <th>Name</th>
 
-            <th>Price</th>
+              <th>Qty</th>
 
-          </tr>
+              <th>Price</th>
 
-          {checkoutData.map((checkoutItem: any) => <tr key={checkoutItem._id}>
+            </tr>
 
-            <td>{checkoutItem.name}</td>
+          </thead>
 
-            <td>{checkoutItem.quantity}</td>
+          <tbody>
 
-            <td>${checkoutItem.price}</td>
+            {checkoutData.map((checkoutItem: any) => <tr key={checkoutItem._id}>
 
-          </tr>)}
+              <td>{checkoutItem.name}</td>
 
-          <tr>
+              <td>{checkoutItem.quantity}</td>
 
-            <th>Grand Total</th>
+              <td>${checkoutItem.price}</td>
 
-            <th>{checkoutData.reduce((tot: any, x: any) => { return tot + x.quantity }, 0)}</th>
+            </tr>)}
 
-            <th>${checkoutData.reduce((tot: any, x: any) => { return tot + x.price }, 0)}</th>
+          </tbody>
 
-          </tr>
+          <tfoot>
+
+            <tr>
+
+              <th>Grand Total</th>
+
+              <th>{checkoutData.reduce((tot: any, x: any) => { return tot + x.quantity }, 0)}</th>
+
+              <th>${checkoutData.reduce((tot: any, x: any) => { return tot + x.price }, 0)}</th>
+
+            </tr>
+
+          </tfoot>
 
         </table>
 

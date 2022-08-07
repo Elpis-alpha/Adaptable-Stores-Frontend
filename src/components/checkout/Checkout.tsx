@@ -6,7 +6,11 @@ import styled from "styled-components"
 
 import DisclaimerCheckout from "./DisclaimerCheckout"
 
+import FinalCheckout from "./FinalCheckout"
+import PaypalCheckout from "./PaypalCheckout"
+
 import QueryCheckout from "./QueryCheckout"
+import StripeCheckout from "./StripeCheckout"
 
 import ViewItemsCheckout from "./ViewItemsCheckout"
 
@@ -40,6 +44,12 @@ const Checkout = () => {
           {checkoutState === "disclaimer" && <DisclaimerCheckout {...{ setCheckoutState }} />}
 
           {checkoutState === "query" && <QueryCheckout {...{ setCheckoutState }} />}
+
+          {checkoutState === "paypal" && <PaypalCheckout {...{ checkoutData, setCheckoutState }} />}
+
+          {checkoutState === "stripe" && <StripeCheckout {...{ setCheckoutState }} />}
+
+          {checkoutState === "final" && <FinalCheckout />}
 
         </div>
 
