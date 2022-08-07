@@ -53,6 +53,12 @@ const productSlice = createSlice({
 
     },
 
+    addMultiProductList: (state, { payload }) => {
+
+      state.multiProduct.data = state.multiProduct.data.concat(payload)
+
+    },
+
     setSingleProductDimensions: (state, { payload }) => {
 
       state.singleProductDimensions.transformOrigin = `${payload.left + (payload.width / 2)}px ${payload.top + (payload.height / 2)}px`
@@ -77,4 +83,4 @@ const productSlice = createSlice({
 
 export default productSlice.reducer;
 
-export const { loadingMultiProductList, setMultiProductList, setSingleProduct, setSingleProductDimensions, loadingSingleProduct } = productSlice.actions
+export const { loadingMultiProductList, setMultiProductList, addMultiProductList, setSingleProduct, setSingleProductDimensions, loadingSingleProduct } = productSlice.actions

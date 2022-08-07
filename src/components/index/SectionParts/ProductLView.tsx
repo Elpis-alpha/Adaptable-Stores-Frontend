@@ -288,6 +288,7 @@ const ProductLViewStyle = styled.div`
       border-left: 3px solid rgb(130, 145, 197);
       overflow: hidden;
       box-shadow: 5px 5px 10px rgba(130, 145, 197,.3);
+      animation: scale-in .5s 1;
       transition: transform .5s;
 
       &:hover {
