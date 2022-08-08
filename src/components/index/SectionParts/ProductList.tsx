@@ -27,7 +27,7 @@ const ProductList = () => {
 
   const navigate = useNavigate()
 
-  const [moreAvailable, setMoreAvailable] = useState(false)
+  const [moreAvailable, setMoreAvailable] = useState(true)
 
   const { queryObject } = useSelector((store: any) => store.query)
 
