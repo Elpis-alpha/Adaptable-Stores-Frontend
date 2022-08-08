@@ -48,9 +48,9 @@ const LoginPage = () => {
 
     setFormStatus('sending')
 
-    if (formEmail.trim().length < 1) { form['elpis-aide-email'].focus(); return setFormStatus('filling') }
+    if (formEmail.trim().length < 1) { form['elpis-adap-email'].focus(); return setFormStatus('filling') }
 
-    if (formPass.trim().length < 1) { form['elpis-aide-pass'].focus(); return setFormStatus('filling') }
+    if (formPass.trim().length < 1) { form['elpis-adap-pass'].focus(); return setFormStatus('filling') }
 
     const userLoginData = await postApiJson(loginUser(), { email: formEmail, password: formPass })
 
@@ -66,7 +66,7 @@ const LoginPage = () => {
 
       }, 2000)
 
-      form['elpis-aide-email'].focus(); return setFormStatus('filling')
+      form['elpis-adap-email'].focus(); return setFormStatus('filling')
 
     } else {
 
@@ -104,13 +104,13 @@ const LoginPage = () => {
 
             <div className="form-pack">
 
-              <label htmlFor="elpis-aide-email">Email</label>
+              <label htmlFor="elpis-adap-email">Email</label>
 
               <div>
 
-                <input required type="email" id='elpis-aide-email' name='elpis-aide-email' placeholder='Enter your email here'
+                <input required type="email" id='elpis-adap-email' name='elpis-adap-email' placeholder='Enter your email here'
 
-                  value={formEmail} onInput={e => setFormEmail(e.currentTarget.value)} autoComplete="elpis-aide-email" />
+                  value={formEmail} onInput={e => setFormEmail(e.currentTarget.value)} autoComplete="elpis-adap-email" />
 
               </div>
 
@@ -118,13 +118,13 @@ const LoginPage = () => {
 
             <div className="form-pack">
 
-              <label htmlFor="elpis-aide-pass">Password</label>
+              <label htmlFor="elpis-adap-pass">Password</label>
 
               <div>
 
-                <input required type={showPassword ? "text" : "password"} id='elpis-aide-pass' name='elpis-aide-pass' placeholder='••••••••••'
+                <input required type={showPassword ? "text" : "password"} id='elpis-adap-pass' name='elpis-adap-pass' placeholder='••••••••••'
 
-                  value={formPass} onInput={e => setFormPass(e.currentTarget.value)} autoComplete="elpis-aide-pass" />
+                  value={formPass} onInput={e => setFormPass(e.currentTarget.value)} autoComplete="elpis-adap-pass" />
 
                 <div className='icon-hol'>{getPasswordIcon(showPassword, setShowPassword)}</div>
 

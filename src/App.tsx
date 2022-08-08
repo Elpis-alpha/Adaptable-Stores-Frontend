@@ -24,6 +24,8 @@ import ProductPage from './pages/ProductPage';
 
 import SignupPage from './pages/SignupPage';
 
+import AdminPage from './pages/AdminPage';
+
 import "react-image-gallery/styles/css/image-gallery.css";
 
 
@@ -52,6 +54,8 @@ const App = () => {
         <Route path='/login' element={<LoginPage />} />
 
         <Route path='/signup' element={<SignupPage />} />
+
+        <Route path='/admin' element={<AdminPage />} />
 
         <Route path='*' element={<PageNotFound />} />
 

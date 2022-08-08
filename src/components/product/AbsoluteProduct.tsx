@@ -5,6 +5,7 @@ import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux"
 
 import { useNavigate } from "react-router-dom";
+import { SpinnerCircular } from "spinners-react";
 
 import styled from "styled-components";
 
@@ -132,7 +133,6 @@ const AbsoluteProduct = () => {
 
     }
 
-
   }
 
   return (
@@ -145,7 +145,7 @@ const AbsoluteProduct = () => {
 
           {available && <Product productData={productData} full={false} />}
 
-          {loading && <>Product is still loading</>}
+          {loading && <div className="loader"><SpinnerCircular size="5pc" color="#4a5c92" secondaryColor="#c9d4f5" /></div>}
 
           {productError && <>Error occured while fetching the product</>}
 
@@ -199,6 +199,13 @@ const AbsoluteProductStyle = styled.div`
       overflow: auto;
       z-index: 50;
       padding: 1pc;
+
+      .loader {
+        padding: 2pc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     }
   
     .cancel-x {

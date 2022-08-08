@@ -26,6 +26,7 @@ import { setUserData } from '../store/slice/userSlice'
 import { sendMiniMessage } from '../controllers/MessageCtrl'
 
 import { siteName, tokenCookieName } from '../__env'
+
 import { setRefetchCart } from '../store/slice/cartSlice'
 
 
@@ -195,15 +196,15 @@ const SignupPage = () => {
 
     setFormStatus('sending')
 
-    if (formName.trim().length < 1) { form['elpis-aide-name'].focus(); return setFormStatus('filling') }
+    if (formName.trim().length < 1) { form['elpis-adap-name'].focus(); return setFormStatus('filling') }
 
-    if (!isEmail(formEmail.trim())) { form['elpis-aide-email'].focus(); return setFormStatus('filling') }
+    if (!isEmail(formEmail.trim())) { form['elpis-adap-email'].focus(); return setFormStatus('filling') }
 
-    if (formPass.trim().length <= 4) { form['elpis-aide-pass'].focus(); return setFormStatus('filling') }
+    if (formPass.trim().length <= 4) { form['elpis-adap-pass'].focus(); return setFormStatus('filling') }
 
     const data = await getApiJson(userExistence(formEmail.trim()))
 
-    if (!(data.message === 'user does not exist')) { form['elpis-aide-email'].focus(); return setFormStatus('filling') }
+    if (!(data.message === 'user does not exist')) { form['elpis-adap-email'].focus(); return setFormStatus('filling') }
 
     const userCreationData = await postApiJson(createUser(), { name: formName, email: formEmail, password: formPass })
 
@@ -219,7 +220,7 @@ const SignupPage = () => {
 
       }, 2000)
 
-      form['elpis-aide-name'].focus(); return setFormStatus('filling')
+      form['elpis-adap-name'].focus(); return setFormStatus('filling')
 
     } else {
 
@@ -257,9 +258,9 @@ const SignupPage = () => {
 
             <div className="form-pack">
 
-              <label htmlFor="elpis-aide-name">Name</label>
+              <label htmlFor="elpis-adap-name">Name</label>
 
-              <input required type="text" id='elpis-aide-name' name='elpis-aide-name' placeholder='Enter your name here'
+              <input required type="text" id='elpis-adap-name' name='elpis-adap-name' placeholder='Enter your name here'
 
                 value={formName} onInput={validateName} onFocus={validateName} onBlur={validateName} />
 
@@ -269,13 +270,13 @@ const SignupPage = () => {
 
             <div className="form-pack">
 
-              <label htmlFor="elpis-aide-email">Email</label>
+              <label htmlFor="elpis-adap-email">Email</label>
 
               <div>
 
-                <input required type="email" id='elpis-aide-email' name='elpis-aide-email' placeholder='Enter your email here'
+                <input required type="email" id='elpis-adap-email' name='elpis-adap-email' placeholder='Enter your email here'
 
-                  value={formEmail} onInput={validateEmail} onFocus={validateEmail} onBlur={identifyUnique} autoComplete="elpis-aide-email" />
+                  value={formEmail} onInput={validateEmail} onFocus={validateEmail} onBlur={identifyUnique} autoComplete="elpis-adap-email" />
 
                 <div className='icon-hol'>{getEmailIcon(emailStatus)}</div>
 
@@ -287,13 +288,13 @@ const SignupPage = () => {
 
             <div className="form-pack">
 
-              <label htmlFor="elpis-aide-pass">Password</label>
+              <label htmlFor="elpis-adap-pass">Password</label>
 
               <div>
 
-                <input required type={showPassword ? "text" : "password"} id='elpis-aide-pass' name='elpis-aide-pass' placeholder='••••••••••'
+                <input required type={showPassword ? "text" : "password"} id='elpis-adap-pass' name='elpis-adap-pass' placeholder='••••••••••'
 
-                  value={formPass} onInput={validatePass} onFocus={validatePass} onBlur={validatePass} autoComplete="elpis-aide-pass" />
+                  value={formPass} onInput={validatePass} onFocus={validatePass} onBlur={validatePass} autoComplete="elpis-adap-pass" />
 
                 <div className='icon-hol'>{getPasswordIcon(showPassword, setShowPassword)}</div>
 

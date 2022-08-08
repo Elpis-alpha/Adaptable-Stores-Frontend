@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 
 import { useDispatch, useSelector } from "react-redux"
+import { SpinnerCircular } from "spinners-react"
 import styled from "styled-components"
 
 import { getProduct } from "../api"
@@ -96,9 +97,9 @@ const ProductPage = () => {
 
       {available && <Product productData={productData} full={true} />}
 
-      {loading && <>Product is still loading</>}
+      {loading && <div className="loader"><SpinnerCircular size="5pc" color="#4a5c92" secondaryColor="#c9d4f5" /></div>}
 
-      {productError && <>Error occured while fetching the product</>}
+      {productError && <div>Error occured while fetching the product</div>}
 
     </ProductPageStyle>
 
@@ -116,6 +117,14 @@ const ProductPageStyle = styled.div`
     > div {
       /* border: 0 none; */
     }
+  }
+
+  .loader {
+    width: 100%;
+    padding: 25vh 2pc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 `
 

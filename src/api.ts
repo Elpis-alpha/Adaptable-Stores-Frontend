@@ -44,7 +44,29 @@ export const getItemPicture = (itemID: string, picID: string) => {
 
 }
 
-export const getProduct = (productID: string) =>  `${backendLocation}/api/items/get?_id=${productID}`
+export const getProduct = (productID: string) => `${backendLocation}/api/items/get?_id=${productID}`
+
+export const getProductbyTitle = (productTitle: string) => `${backendLocation}/api/items/get?title=${productTitle}`
+
+export const verifyAdmin = (item_password: string) => `${backendLocation}/api/items/verify?item_password=${item_password}`
+
+export const createProduct = (item_password: string) => `${backendLocation}/api/items/create?item_password=${item_password}`
+
+export const updateProduct = (item_password: string, productID: string) => `${backendLocation}/api/items/update?item_password=${item_password}&_id=${productID}`
+
+export const deleteProduct = (item_password: string, productID: string) => `${backendLocation}/api/items/delete?item_password=${item_password}&_id=${productID}`
+
+export const uploadProductPicture = (item_password: string, productID: string) => {
+
+  return `${backendLocation}/api/items/picture/upload?item_password=${item_password}&_id=${productID}`
+
+}
+
+export const deleteProductPicture = (item_password: string, productID: string, picID: string) => {
+
+  return `${backendLocation}/api/items/pictures/remove?item_password=${item_password}&_id=${productID}&picID=${picID}`
+
+}
 
 
 
