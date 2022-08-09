@@ -2,7 +2,7 @@ export const creator = "Elpis"
 
 export const siteName = "Adaptable Stores 🛒"
 
-export const siteDescription = "A simple template of a functional next js application"
+export const siteDescription = "An e-commerce store where you can buy all the goods you have ever imagined"
 
 export const keywordx = ["elpis", "next", "nextjs"]
 
