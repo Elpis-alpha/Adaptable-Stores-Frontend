@@ -8,7 +8,7 @@ import IndexQuery from "../components/index/IndexQuery"
 
 import IndexSection from "../components/index/IndexSection"
 
-import { createQueryString } from "../controllers/SpecialCtrl"
+import { createQueryString, getQueryObject } from "../controllers/SpecialCtrl"
 
 import { useSelector } from "react-redux"
 
@@ -26,9 +26,11 @@ const IndexPage = () => {
   // Sets the value of display string and ensures the query string is valid 
   useEffect(() => {
 
+    const { view } = getQueryObject(window.location.href);
+
     if (!locationOptions.includes(view) && active) navigate.current(createQueryString({ view: 'query' }), { replace: true })
 
-  }, [view, locationOptions, active])
+  }, [locationOptions, active])
 
 
   return (

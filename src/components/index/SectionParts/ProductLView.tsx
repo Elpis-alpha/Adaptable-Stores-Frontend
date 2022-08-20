@@ -190,13 +190,21 @@ const ProductLView = ({ productData, queryObject }: any) => {
 
   const setProductDimensions = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
 
-    const productBox = e.currentTarget
+    if (e.currentTarget.href === createQueryString({ ...queryObject, product: _id })) {
 
-    const { top, left, width, height } = productBox.getBoundingClientRect()
+      const productBox = e.currentTarget
 
-    dispatch(setSingleProductDimensions({ top, left, width, height }))
+      const { top, left, width, height } = productBox.getBoundingClientRect()
+
+      dispatch(setSingleProductDimensions({ top, left, width, height }))
+
+    }
 
   }
+
+  // If the screen width is less than 800px, show the full page else show the modal
+  const productLink = window?.matchMedia("(max-width: 800px)").matches ? `/product${createQueryString({ product: _id })}` : createQueryString({ ...queryObject, product: _id })
+
 
   return (
 
@@ -204,7 +212,7 @@ const ProductLView = ({ productData, queryObject }: any) => {
 
       <div className="pl-item">
 
-        <Link to={createQueryString({ ...queryObject, product: _id })} className="pl-content" onClick={setProductDimensions} title={"Click to open a detailed view on this product"}>
+        <Link to={productLink} className="pl-content" onClick={setProductDimensions} title={"Click to open a detailed view on this product"}>
 
           <div className="inner">
 
